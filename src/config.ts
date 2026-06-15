@@ -27,13 +27,13 @@ export const BRAND = {
  *                   le bouton Premium affichera « Bientôt disponible ».
  */
 export const LINKS = {
-  APP_URL: 'https://app.exemple.com',
-  SIGNUP_URL: 'https://app.exemple.com/auth',
-  LOGIN_URL: 'https://app.exemple.com/auth',
+  APP_URL: 'https://carnet-de-recettes.vercel.app/',
+  SIGNUP_URL: 'https://carnet-de-recettes.vercel.app/auth',
+  LOGIN_URL: 'https://carnet-de-recettes.vercel.app/auth',
   CHECKOUT_URL: null as string | null,
 
   // Liens du pied de page (mets à jour ou laisse vide)
-  CONTACT_EMAIL: 'contact@exemple.com',
+  CONTACT_EMAIL: 'maxi.charr@gmail.com',
   PRIVACY_URL: '#',
   TERMS_URL: '#',
   LEGAL_URL: '#',
