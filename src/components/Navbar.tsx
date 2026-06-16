@@ -1,11 +1,12 @@
 import { useState } from 'react'
 import { Menu, X } from 'lucide-react'
 
-import { BRAND, LINKS } from '../config'
+import { BRAND } from '../config'
 import Button from './Button'
 
 const NAV_LINKS = [
-  { label: 'Fonctionnalités', href: '#fonctionnalites' },
+  { label: 'Les carnets', href: '#carnets' },
+  { label: 'Pourquoi', href: '#fonctionnalites' },
   { label: 'Comment ça marche', href: '#comment-ca-marche' },
   { label: 'Tarifs', href: '#tarifs' },
   { label: 'Questions', href: '#faq' },
@@ -44,16 +45,8 @@ export default function Navbar() {
 
         {/* CTA desktop */}
         <div className="hidden items-center gap-3 lg:flex">
-          <a
-            href={LINKS.LOGIN_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-sm font-bold text-cacao/80 transition hover:text-terracotta"
-          >
-            Connexion
-          </a>
-          <Button href={LINKS.SIGNUP_URL} size="md">
-            Commencer
+          <Button href="#carnets" external={false} size="md">
+            Découvrir les carnets
           </Button>
         </div>
 
@@ -86,16 +79,14 @@ export default function Navbar() {
           </nav>
 
           <div className="mt-3 grid gap-2">
-            <Button href={LINKS.SIGNUP_URL} size="lg" fullWidth>
-              Commencer gratuitement
-            </Button>
             <Button
-              href={LINKS.LOGIN_URL}
-              variant="secondary"
+              href="#carnets"
+              external={false}
               size="lg"
               fullWidth
+              onClick={() => setOpen(false)}
             >
-              Connexion
+              Découvrir les carnets
             </Button>
           </div>
         </div>

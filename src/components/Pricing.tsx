@@ -1,24 +1,23 @@
 import { useState } from 'react'
 import { Check, Minus, Sparkles } from 'lucide-react'
 
-import { LINKS, PRICING } from '../config'
+import { PRICING } from '../config'
 import Button from './Button'
 import SectionHeader from './SectionHeader'
 
 type Plan = { label: string; free: boolean; premium: boolean }
 
 const PLAN_FEATURES: Plan[] = [
-  { label: 'Recettes illimitées', free: true, premium: true },
-  { label: 'Liste de courses par rayon', free: true, premium: true },
-  { label: 'Mode frigo & anti-gaspi', free: true, premium: true },
-  { label: 'Planning de la semaine', free: true, premium: true },
-  { label: 'Favoris & collections', free: true, premium: true },
-  { label: 'Adaptation des portions', free: true, premium: true },
-  { label: 'Carnet partagé en famille', free: false, premium: true },
+  { label: 'Toutes vos données réunies', free: true, premium: true },
+  { label: 'Sans publicité', free: true, premium: true },
+  { label: 'Application web mobile & ordinateur', free: true, premium: true },
+  { label: 'Mises à jour régulières', free: true, premium: true },
   { label: 'Synchronisation multi-appareils', free: false, premium: true },
-  { label: 'Export & impression PDF soignés', free: false, premium: true },
   { label: 'Sauvegarde automatique', free: false, premium: true },
+  { label: 'Export & impression soignés', free: false, premium: true },
+  { label: 'Historique étendu', free: false, premium: true },
   { label: 'Support prioritaire', free: false, premium: true },
+  { label: 'Accès aux nouveautés en avant-première', free: false, premium: true },
 ]
 
 const REASSURANCE = [
@@ -29,7 +28,6 @@ const REASSURANCE = [
 
 export default function Pricing() {
   const [yearly, setYearly] = useState(false)
-  const hasCheckout = Boolean(LINKS.CHECKOUT_URL)
 
   const premiumPrice = yearly
     ? PRICING.premium.priceYearly
@@ -44,8 +42,8 @@ export default function Pricing() {
         <SectionHeader
           centered
           eyebrow="Offres & tarifs"
-          title="Un carnet gratuit, une famille encore mieux servie"
-          subtitle="Commencez gratuitement, sans carte bancaire. Passez à Premium le jour où vous voulez cuisiner à plusieurs."
+          title="Le même principe pour chaque carnet"
+          subtitle="Commencez gratuitement, sans carte bancaire. Passez à Premium le jour où vous voulez aller plus loin — valable pour chaque carnet."
         />
 
         {/* Bascule mensuel / annuel */}
@@ -122,8 +120,8 @@ export default function Pricing() {
             </ul>
 
             <div className="mt-auto pt-8">
-              <Button href={LINKS.SIGNUP_URL} variant="secondary" size="lg" fullWidth>
-                Créer mon carnet gratuit
+              <Button href="#carnets" external={false} variant="secondary" size="lg" fullWidth>
+                Choisir un carnet
               </Button>
             </div>
           </div>
@@ -141,10 +139,10 @@ export default function Pricing() {
                   </span>
                   <div>
                     <p className="font-display text-xl font-bold">
-                      Famille Premium
+                      Premium
                     </p>
                     <p className="text-sm text-cream-100/80">
-                      Pour cuisiner à plusieurs
+                      Pour aller plus loin
                     </p>
                   </div>
                 </div>
@@ -165,7 +163,7 @@ export default function Pricing() {
               </div>
 
               <p className="mt-1 text-sm text-cream-100/70">
-                Soit moins qu'un café par mois pour toute la famille.
+                Soit moins qu'un café par mois.
               </p>
 
               <ul className="mt-7 space-y-3">
@@ -187,19 +185,9 @@ export default function Pricing() {
               </ul>
 
               <div className="mt-auto pt-8">
-                {hasCheckout ? (
-                  <Button href={LINKS.CHECKOUT_URL} variant="honey" size="lg" fullWidth>
-                    Passer au Premium
-                  </Button>
-                ) : (
-                  <button
-                    type="button"
-                    disabled
-                    className="w-full cursor-not-allowed rounded-full bg-honey/40 px-7 py-4 text-center font-bold text-white/60"
-                  >
-                    Bientôt disponible
-                  </button>
-                )}
+                <Button href="#carnets" external={false} variant="honey" size="lg" fullWidth>
+                  Choisir un carnet
+                </Button>
 
                 <p className="mt-3 text-center text-xs font-semibold text-cream-100/70">
                   Sans engagement · résiliable à tout moment

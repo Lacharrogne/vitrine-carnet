@@ -1,38 +1,136 @@
 /**
  * ──────────────────────────────────────────────────────────────────────────
- *  CONFIGURATION DE LA VITRINE
+ *  CONFIGURATION DE LA VITRINE — « Les Carnets »
  * ──────────────────────────────────────────────────────────────────────────
  *
- *  C'est le SEUL fichier à modifier pour brancher la vitrine sur tes sites.
- *  Tous les boutons et liens de la page lisent leurs URLs ici.
+ *  Cette vitrine présente TOUT l'écosystème « Carnet » : un même esprit
+ *  (clair, beau, premium, rassurant) décliné en plusieurs carnets, chacun
+ *  avec sa propre identité.
  *
- *  👉 Remplace les valeurs ci-dessous par tes vraies adresses quand elles
- *     seront prêtes.
+ *  C'est le SEUL fichier à modifier pour brancher la vitrine sur tes sites :
+ *  tous les boutons et liens de la page lisent leurs URLs ici.
+ *
+ *  👉 Mets à jour les adresses (`url`, `signupUrl`) et les statuts (`status`)
+ *     de chaque carnet ci-dessous au fur et à mesure de tes mises en ligne.
  */
 
 export const BRAND = {
-  name: 'Carnet de recettes',
-  tagline: 'Cuisine maison & petits plats',
+  name: 'Les Carnets',
+  tagline: 'Une vie organisée, carnet après carnet',
   logo: '/logo.png',
 }
 
 /**
- * URLs externes.
+ * L'écosystème, en une phrase. Sert au hero et au référencement.
+ */
+export const ECOSYSTEM = {
+  name: 'Les Carnets',
+  promise:
+    'Une famille d’applications qui mettent de l’ordre dans votre quotidien : vos recettes, votre argent, votre sport. Le même soin, le même calme, à chaque page.',
+}
+
+export type CarnetStatus = 'live' | 'soon'
+export type CarnetAccent = 'terracotta' | 'sage' | 'azure' | 'honey'
+
+export interface Carnet {
+  id: string
+  name: string
+  /** Court : la promesse du carnet en quelques mots. */
+  tagline: string
+  /** Une à deux phrases, ce que le carnet fait pour l'utilisateur. */
+  description: string
+  emoji: string
+  accent: CarnetAccent
+  status: CarnetStatus
+  /** 3 points forts affichés sur la carte. */
+  highlights: string[]
+  /** Adresse de l'application (laisse `null` si le carnet n'est pas en ligne). */
+  url: string | null
+  /** Page d'inscription / création de compte (souvent `<url>/auth`). */
+  signupUrl: string | null
+}
+
+/**
+ * Les carnets de l'écosystème.
  *
- * - APP_URL       : l'adresse de ton application (le carnet lui-même).
- * - SIGNUP_URL    : page d'inscription / création de compte.
- * - LOGIN_URL     : page de connexion.
- * - CHECKOUT_URL  : page/site de paiement de l'abonnement Premium.
- *                   Tant qu'elle n'est pas prête, laisse `null` :
- *                   le bouton Premium affichera « Bientôt disponible ».
+ * Ordre = ordre d'affichage. Passe un carnet en `status: 'live'` et renseigne
+ * ses `url` / `signupUrl` dès qu'il est déployé.
+ */
+export const CARNETS: Carnet[] = [
+  {
+    id: 'recettes',
+    name: 'Carnet de recettes',
+    tagline: 'Votre cuisine, enfin organisée',
+    description:
+      'Réunissez vos recettes, planifiez vos repas et préparez vos courses — tout dans un seul carnet, simple et chaleureux.',
+    emoji: '🍳',
+    accent: 'terracotta',
+    status: 'live',
+    highlights: [
+      'Recettes & favoris réunis',
+      'Liste de courses par rayon',
+      'Planning de la semaine',
+    ],
+    url: 'https://carnet-de-recettes.vercel.app/',
+    signupUrl: 'https://carnet-de-recettes.vercel.app/auth',
+  },
+  {
+    id: 'budget',
+    name: 'Carnet de budget',
+    tagline: 'Votre argent, enfin clair',
+    description:
+      'La puissance d’un tableur, sans la complexité d’Excel. Suivez revenus, dépenses, budgets et épargne, et sachez toujours où vous en êtes.',
+    emoji: '🪙',
+    accent: 'sage',
+    status: 'live',
+    highlights: [
+      'Score de santé financière',
+      'Budgets & alertes en douceur',
+      'Épargne, objectifs & patrimoine',
+    ],
+    url: 'https://carnet-de-budget.vercel.app/',
+    signupUrl: 'https://carnet-de-budget.vercel.app/auth',
+  },
+  {
+    id: 'sport',
+    name: 'Carnet de sport',
+    tagline: 'Votre forme, enfin suivie',
+    description:
+      'Planifiez vos séances, suivez vos progrès et gardez le rythme. Un carnet d’entraînement clair qui vous motive sans vous juger.',
+    emoji: '🏃',
+    accent: 'azure',
+    status: 'live',
+    highlights: [
+      'Séances & programmes',
+      'Suivi des progrès',
+      'Objectifs motivants',
+    ],
+    url: 'https://carnet-de-sport.vercel.app/',
+    signupUrl: 'https://carnet-de-sport.vercel.app/auth',
+  },
+  {
+    id: 'hub',
+    name: 'Le Hub',
+    tagline: 'Tous vos carnets, un seul endroit',
+    description:
+      'Le point de départ de l’écosystème : retrouvez tous vos carnets, un compte unique et une vue d’ensemble de votre quotidien. Bientôt.',
+    emoji: '🧭',
+    accent: 'honey',
+    status: 'soon',
+    highlights: [
+      'Un compte pour tout',
+      'Vue d’ensemble unifiée',
+      'Vos carnets connectés',
+    ],
+    url: null,
+    signupUrl: null,
+  },
+]
+
+/**
+ * Liens transverses (pied de page, contact).
  */
 export const LINKS = {
-  APP_URL: 'https://carnet-de-recettes.vercel.app/',
-  SIGNUP_URL: 'https://carnet-de-recettes.vercel.app/auth',
-  LOGIN_URL: 'https://carnet-de-recettes.vercel.app/auth',
-  CHECKOUT_URL: null as string | null,
-
-  // Liens du pied de page (mets à jour ou laisse vide)
   CONTACT_EMAIL: 'maxi.charr@gmail.com',
   PRIVACY_URL: '#',
   TERMS_URL: '#',
@@ -40,7 +138,8 @@ export const LINKS = {
 }
 
 /**
- * Tarifs affichés. Modifie librement le prix et la période.
+ * Tarifs affichés. Le même principe pour chaque carnet : gratuit pour
+ * démarrer, Premium pour aller plus loin.
  */
 export const PRICING = {
   free: {

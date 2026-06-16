@@ -1,6 +1,7 @@
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import ProblemSolution from './components/ProblemSolution'
+import Carnets from './components/Carnets'
 import Features from './components/Features'
 import Benefits from './components/Benefits'
 import HowItWorks from './components/HowItWorks'
@@ -18,6 +19,7 @@ export default function App() {
       <main>
         <Hero />
         <ProblemSolution />
+        <Carnets />
         <Features />
         <Benefits />
         <HowItWorks />

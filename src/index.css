@@ -32,6 +32,11 @@
   --color-sage-deep: #5f6b41;
   --color-sage-soft: #e8ebdc;
 
+  /* Bleu pétrole doux — accent du Carnet de sport */
+  --color-azure: #3f6f9e;
+  --color-azure-deep: #2f567c;
+  --color-azure-soft: #dbe6f0;
+
   /* Polices */
   --font-sans: "Mulish", "Segoe UI", system-ui, -apple-system, sans-serif;
   --font-display: "Fraunces", "Georgia", "Times New Roman", serif;
@@ -83,8 +88,9 @@ body {
   /* Fond chaleureux "chalet" : crème dégradée + lueurs terracotta/miel */
   background-color: #fbf6ee;
   background-image:
-    radial-gradient(circle at 12% 8%, rgba(194, 104, 61, 0.1), transparent 30%),
-    radial-gradient(circle at 88% 4%, rgba(217, 154, 78, 0.12), transparent 28%),
+    radial-gradient(circle at 10% 8%, rgba(194, 104, 61, 0.09), transparent 28%),
+    radial-gradient(circle at 90% 4%, rgba(217, 154, 78, 0.1), transparent 26%),
+    radial-gradient(circle at 78% 52%, rgba(63, 111, 158, 0.07), transparent 30%),
     radial-gradient(circle at 50% 100%, rgba(126, 138, 90, 0.08), transparent 40%),
     linear-gradient(180deg, #fffaf3 0%, #fbf6ee 40%, #f7eedf 100%);
   background-attachment: fixed;

@@ -9,7 +9,7 @@ import SectionHeader from './SectionHeader'
 const TESTIMONIALS = [
   {
     name: 'Sophie M.',
-    role: 'Maman de 3 enfants',
+    role: 'Utilisatrice du Carnet de recettes',
     quote:
       "Je ne cherche plus mes recettes partout. Tout est réuni, organisé, et la liste de courses se remplit toute seule. Un vrai gain de temps chaque semaine.",
     initial: 'S',
@@ -17,19 +17,19 @@ const TESTIMONIALS = [
   },
   {
     name: 'Marc D.',
-    role: 'Passionné de cuisine',
+    role: 'Utilisateur du Carnet de budget',
     quote:
-      "Le mode frigo est génial : je rentre ce que j'ai et le carnet me propose des recettes adaptées. Fini les légumes oubliés.",
+      "Pour la première fois, je sais où part mon argent sans me prendre la tête avec un tableur. Le ton est doux, jamais culpabilisant : je vois enfin clair.",
     initial: 'M',
-    color: 'bg-honey text-espresso',
+    color: 'bg-sage-deep text-white',
   },
   {
     name: 'Julie T.',
-    role: 'Cuisinière du quotidien',
+    role: 'Utilisatrice du Carnet de sport',
     quote:
-      "L'interface est douce et claire, on s'y retrouve tout de suite. J'ai enfin un endroit où garder toutes mes recettes de famille.",
+      "Je planifie mes séances et je suis mes progrès sans pression. L'appli me motive à garder le rythme, et j'adore retrouver le même esprit que mes autres carnets.",
     initial: 'J',
-    color: 'bg-sage-deep text-white',
+    color: 'bg-azure text-white',
   },
 ]
 
@@ -39,7 +39,7 @@ export default function Testimonials() {
       <SectionHeader
         centered
         eyebrowClassName="text-honey"
-        eyebrow="Ils cuisinent avec le carnet"
+        eyebrow="Ils utilisent Les Carnets"
         title="Ce qu'en disent nos utilisateurs"
       />
 

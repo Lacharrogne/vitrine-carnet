@@ -1,29 +1,29 @@
-import { Clock, Leaf, Smile, Wallet } from 'lucide-react'
+import { Heart, LayoutGrid, ShieldCheck, Sparkles } from 'lucide-react'
 
 const BENEFITS = [
   {
-    icon: Clock,
-    title: 'Gagnez du temps',
+    icon: LayoutGrid,
+    title: 'Tout au même endroit',
     description:
-      'Plus de recherche dans dix applications. Tout est réuni, prêt à l’emploi, en quelques secondes.',
+      'Vos recettes, votre budget, votre forme : un seul esprit, des carnets qui se parlent. Fini de chercher dans dix applis.',
   },
   {
-    icon: Leaf,
-    title: 'Moins de gaspillage',
+    icon: Heart,
+    title: 'Clair et rassurant',
     description:
-      'Cuisinez avec ce que vous avez déjà et planifiez juste : votre frigo ne déborde plus.',
+      'Des chiffres et des suivis présentés avec douceur, pour vous éclairer sans jamais vous culpabiliser.',
   },
   {
-    icon: Wallet,
-    title: 'Des courses maîtrisées',
+    icon: Sparkles,
+    title: 'Beau au quotidien',
     description:
-      'Une liste claire et complète évite les achats en double et les allers-retours au magasin.',
+      'Une interface premium, calme et soignée, agréable à ouvrir chaque jour — parce que le quotidien mérite du beau.',
   },
   {
-    icon: Smile,
-    title: 'Le plaisir de cuisiner',
+    icon: ShieldCheck,
+    title: 'Vos données privées',
     description:
-      'Une cuisine mieux organisée, c’est plus de sérénité et plus d’envie de se mettre aux fourneaux.',
+      'Sans publicité, sans revente. Ce que vous notez reste à vous, protégé et en sécurité.',
   },
 ]
 
@@ -33,14 +33,14 @@ export default function Benefits() {
       <div className="mx-auto max-w-6xl px-5 py-12 sm:py-16">
         <div className="relative overflow-hidden rounded-[2rem] bg-espresso px-6 py-10 shadow-lift sm:rounded-[2.5rem] sm:px-10 sm:py-14">
           <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-terracotta/25 blur-3xl" />
-          <div className="pointer-events-none absolute -bottom-24 -left-20 h-64 w-64 rounded-full bg-honey/15 blur-3xl" />
+          <div className="pointer-events-none absolute -bottom-24 -left-20 h-64 w-64 rounded-full bg-azure/15 blur-3xl" />
 
           <div className="relative">
             <p className="text-sm font-bold uppercase tracking-[0.12em] text-honey">
               Les bénéfices au quotidien
             </p>
             <h2 className="mt-2 max-w-2xl font-display text-3xl font-black leading-tight text-white sm:text-4xl">
-              Plus qu’une appli, une cuisine plus simple
+              Plus que des applis, un quotidien plus calme
             </h2>
 
             <div className="mt-9 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
