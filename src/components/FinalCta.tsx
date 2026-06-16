@@ -12,7 +12,7 @@ export default function FinalCta() {
         <div className="relative">
           <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-xs font-bold text-cream-100">
             <Sparkles className="h-4 w-4" />
-            Gratuit · sans engagement
+            Essai gratuit · sans engagement
           </span>
 
           <h2 className="mx-auto mt-5 max-w-2xl font-display text-3xl font-black leading-tight text-white sm:text-4xl">

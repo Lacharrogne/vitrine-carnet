@@ -22,12 +22,12 @@ const FAQ_ITEMS = [
   {
     question: 'Combien ça coûte ?',
     answer:
-      "Chaque carnet est gratuit pour démarrer, avec tout l'essentiel pour bien commencer. Un abonnement Premium est ensuite disponible en option pour aller plus loin.",
+      "Chaque carnet commence par un essai gratuit de 14 jours, avec toutes les fonctionnalités et sans carte bancaire. Pour continuer ensuite, un abonnement simple débloque tout — sans engagement, résiliable à tout moment.",
   },
   {
     question: 'Puis-je annuler à tout moment ?',
     answer:
-      "Oui, à tout moment et sans engagement. L'abonnement Premium est résiliable sans frais ni délai de préavis.",
+      "Oui, à tout moment et sans engagement. L'abonnement est résiliable sans frais ni délai de préavis, et l'essai gratuit ne vous engage à rien.",
   },
   {
     question: 'Mes données sont-elles privées ?',

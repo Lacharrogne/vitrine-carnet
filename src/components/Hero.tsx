@@ -61,7 +61,7 @@ export default function Hero() {
             </div>
 
             <div className="mt-7 flex flex-wrap gap-x-6 gap-y-2">
-              {['Gratuit pour démarrer', 'Sans publicité', 'Vos données privées'].map(
+              {['14 jours d’essai gratuit', 'Sans publicité', 'Vos données privées'].map(
                 (label) => (
                   <span
                     key={label}

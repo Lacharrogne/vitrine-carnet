@@ -141,7 +141,7 @@ export default function Carnets() {
                           rel="noopener noreferrer"
                           className={`text-center text-sm font-bold transition ${accent.link}`}
                         >
-                          Créer un compte gratuit
+                          Essayer gratuitement
                         </a>
                       )}
                     </div>

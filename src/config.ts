@@ -138,14 +138,13 @@ export const LINKS = {
 }
 
 /**
- * Tarifs affichés. Le même principe pour chaque carnet : gratuit pour
- * démarrer, Premium pour aller plus loin.
+ * Tarifs affichés. Le même principe pour chaque carnet : un essai gratuit
+ * (toutes les fonctionnalités, sans carte bancaire), puis un abonnement
+ * simple qui débloque tout.
  */
 export const PRICING = {
-  free: {
-    price: '0 €',
-    period: '/ pour toujours',
-  },
+  /** Durée de l'essai gratuit, en jours. */
+  trialDays: 14,
   premium: {
     priceMonthly: '3,99 €',
     periodMonthly: '/ mois',

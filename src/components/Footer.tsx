@@ -5,7 +5,7 @@ import { BRAND, CARNETS, LINKS } from '../config'
 const TRUST_SIGNALS = [
   { icon: Heart, label: 'Fait avec soin' },
   { icon: ShieldCheck, label: 'Sans publicité' },
-  { icon: Leaf, label: 'Gratuit pour démarrer' },
+  { icon: Leaf, label: '14 jours d’essai gratuit' },
 ]
 
 const DISCOVER_LINKS = [
