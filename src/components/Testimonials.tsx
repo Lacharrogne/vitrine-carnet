@@ -25,9 +25,9 @@ const TESTIMONIALS = [
   },
   {
     name: 'Julie T.',
-    role: 'Utilisatrice du Carnet de sport',
+    role: 'Utilise deux carnets',
     quote:
-      "Je planifie mes séances et je suis mes progrès sans pression. L'appli me motive à garder le rythme, et j'adore retrouver le même esprit que mes autres carnets.",
+      "J'utilise le Carnet de recettes et le Carnet de budget au quotidien. On retrouve le même esprit calme et soigné d'une appli à l'autre, sans usine à gaz : ça change tout.",
     initial: 'J',
     color: 'bg-azure text-white',
   },

@@ -12,12 +12,12 @@ const FAQ_ITEMS = [
   {
     question: 'Quels carnets existent aujourd’hui ?',
     answer:
-      "Trois carnets sont déjà en ligne : le Carnet de recettes, le Carnet de budget et le Carnet de sport. Un Hub pour les réunir tous arrive bientôt.",
+      "Deux carnets sont déjà en ligne : le Carnet de recettes et le Carnet de budget. Le Carnet de sport arrive très bientôt.",
   },
   {
     question: 'Dois-je créer un compte par carnet ?',
     answer:
-      "Pour l'instant, oui : chaque carnet a son propre compte. Le Hub, à venir, unifiera tout avec un compte unique pour accéder à l'ensemble de vos carnets.",
+      "Oui : chaque carnet est indépendant et possède son propre compte. Vous n'utilisez que le ou les carnets qui vous intéressent, sans rien de superflu.",
   },
   {
     question: 'Combien ça coûte ?',
@@ -42,7 +42,7 @@ const FAQ_ITEMS = [
   {
     question: 'De nouveaux carnets vont-ils arriver ?',
     answer:
-      "Oui, l'écosystème s'agrandit régulièrement. De nouveaux carnets sont à l'étude, et le Hub viendra prochainement les rassembler en un seul endroit.",
+      "Oui, l'écosystème s'agrandit régulièrement : de nouveaux carnets sont à l'étude pour couvrir d'autres aspects du quotidien, toujours avec le même soin.",
   },
 ]
 

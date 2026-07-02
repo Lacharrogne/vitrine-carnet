@@ -99,29 +99,15 @@ export const CARNETS: Carnet[] = [
       'Planifiez vos séances, suivez vos progrès et gardez le rythme. Un carnet d’entraînement clair qui vous motive sans vous juger.',
     emoji: '🏃',
     accent: 'azure',
-    status: 'live',
+    status: 'soon',
     highlights: [
       'Séances & programmes',
       'Suivi des progrès',
       'Objectifs motivants',
     ],
-    url: 'https://carnet-de-sport.vercel.app/',
-    signupUrl: 'https://carnet-de-sport.vercel.app/auth',
-  },
-  {
-    id: 'hub',
-    name: 'Le Hub',
-    tagline: 'Tous vos carnets, un seul endroit',
-    description:
-      'Le point de départ de l’écosystème : retrouvez tous vos carnets, un compte unique et une vue d’ensemble de votre quotidien. Bientôt.',
-    emoji: '🧭',
-    accent: 'honey',
-    status: 'soon',
-    highlights: [
-      'Un compte pour tout',
-      'Vue d’ensemble unifiée',
-      'Vos carnets connectés',
-    ],
+    // Déployé mais pas encore finalisé : on n'envoie pas les visiteurs
+    // vers une app incomplète. Repasser en 'live' + renseigner les URLs
+    // une fois le Carnet de sport prêt.
     url: null,
     signupUrl: null,
   },

@@ -137,10 +137,11 @@ export default function Hero() {
               {/* Pied mockup */}
               <div className="mt-3 rounded-xl bg-honey-soft p-3 ring-1 ring-bark">
                 <p className="mb-2 text-xs font-bold text-hazel">
-                  🧭 Bientôt : Le Hub
+                  ✨ Essai gratuit, sans carte
                 </p>
                 <p className="text-xs leading-5 text-cacao">
-                  Un compte unique pour ouvrir tous vos carnets d’un seul geste.
+                  Testez chaque carnet librement, puis gardez seulement celui
+                  qui vous ressemble.
                 </p>
               </div>
             </div>
