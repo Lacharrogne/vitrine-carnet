@@ -63,14 +63,16 @@ export default function Hero() {
               </Button>
             </div>
 
-            <div className="mt-7 flex flex-wrap gap-x-6 gap-y-2">
+            <div className="mt-7 flex flex-wrap gap-2.5">
               {['14 jours d’essai gratuit', 'Sans publicité', 'Vos données privées'].map(
                 (label) => (
                   <span
                     key={label}
-                    className="flex items-center gap-1.5 text-sm font-semibold text-hazel"
+                    className="flex items-center gap-2 rounded-full bg-white/70 px-3.5 py-1.5 text-sm font-semibold text-cacao shadow-soft ring-1 ring-bark"
                   >
-                    <span className="text-sage-deep">✓</span>
+                    <span className="flex h-4 w-4 items-center justify-center rounded-full bg-sage-soft text-[10px] font-black text-sage-deep">
+                      ✓
+                    </span>
                     {label}
                   </span>
                 ),
