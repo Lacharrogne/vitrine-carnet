@@ -19,7 +19,7 @@ import { supabase } from './lib/supabase'
 
 export default function App() {
   const { session } = useSession()
-  const [authOpen, setAuthOpen] = useState(false)
+  const [authMode, setAuthMode] = useState<'login' | 'signup' | null>(null)
 
   async function handleLogout() {
     await supabase?.auth.signOut()
@@ -29,7 +29,7 @@ export default function App() {
     <div className="paper-grain min-h-screen">
       <Navbar
         session={session}
-        onOpenAuth={() => setAuthOpen(true)}
+        onOpenAuth={(mode) => setAuthMode(mode)}
         onLogout={handleLogout}
       />
 
@@ -42,7 +42,7 @@ export default function App() {
         <Reveal><HowItWorks /></Reveal>
         <Reveal><Testimonials /></Reveal>
         <Reveal>
-          <Pricing session={session} onOpenAuth={() => setAuthOpen(true)} />
+          <Pricing session={session} onOpenAuth={() => setAuthMode('signup')} />
         </Reveal>
         <Reveal><Faq /></Reveal>
         <Reveal><FinalCta /></Reveal>
@@ -50,7 +50,9 @@ export default function App() {
 
       <Footer />
 
-      {authOpen && <AuthModal onClose={() => setAuthOpen(false)} />}
+      {authMode && (
+        <AuthModal initialMode={authMode} onClose={() => setAuthMode(null)} />
+      )}
     </div>
   )
 }

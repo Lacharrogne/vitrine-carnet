@@ -40,7 +40,7 @@ export default function FinalCta() {
               external={false}
               variant="ghost"
               size="lg"
-              className="w-full sm:w-auto"
+              className="w-full border border-cream-100/40 text-cream-100 hover:bg-white/10 sm:w-auto"
             >
               Voir les tarifs
             </Button>

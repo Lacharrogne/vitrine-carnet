@@ -7,7 +7,7 @@ import Button from './Button'
 
 type NavbarProps = {
   session: Session | null
-  onOpenAuth: () => void
+  onOpenAuth: (mode: 'login' | 'signup') => void
   onLogout: () => void
 }
 
@@ -79,10 +79,14 @@ export default function Navbar({ session, onOpenAuth, onLogout }: NavbarProps) {
             </>
           ) : (
             <>
-              <Button variant="secondary" size="md" onClick={onOpenAuth}>
+              <Button
+                variant="secondary"
+                size="md"
+                onClick={() => onOpenAuth('login')}
+              >
                 Se connecter
               </Button>
-              <Button size="md" onClick={onOpenAuth}>
+              <Button size="md" onClick={() => onOpenAuth('signup')}>
                 Créer un compte
               </Button>
             </>
@@ -142,7 +146,7 @@ export default function Navbar({ session, onOpenAuth, onLogout }: NavbarProps) {
                   fullWidth
                   onClick={() => {
                     setOpen(false)
-                    onOpenAuth()
+                    onOpenAuth('signup')
                   }}
                 >
                   Créer un compte
@@ -153,7 +157,7 @@ export default function Navbar({ session, onOpenAuth, onLogout }: NavbarProps) {
                   fullWidth
                   onClick={() => {
                     setOpen(false)
-                    onOpenAuth()
+                    onOpenAuth('login')
                   }}
                 >
                   Se connecter

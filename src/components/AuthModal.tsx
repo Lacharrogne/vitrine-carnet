@@ -5,8 +5,14 @@ import { supabase, IS_SUPABASE_CONFIGURED } from '../lib/supabase'
 
 type Mode = 'login' | 'signup'
 
-export default function AuthModal({ onClose }: { onClose: () => void }) {
-  const [mode, setMode] = useState<Mode>('signup')
+export default function AuthModal({
+  onClose,
+  initialMode = 'signup',
+}: {
+  onClose: () => void
+  initialMode?: Mode
+}) {
+  const [mode, setMode] = useState<Mode>(initialMode)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
