@@ -8,6 +8,7 @@ import {
   LEMONSQUEEZY,
   buildCheckoutUrl,
 } from '../lib/subscription'
+import { useSubscription } from '../lib/useSubscription'
 import Button from './Button'
 import SectionHeader from './SectionHeader'
 
@@ -39,6 +40,8 @@ const REASSURANCE = [
 export default function Pricing({ session, onOpenAuth }: PricingProps) {
   const [yearly, setYearly] = useState(false)
 
+  const { isPremium, portalUrl } = useSubscription(session)
+
   const premiumPrice = yearly
     ? PRICING.premium.priceYearly
     : PRICING.premium.priceMonthly
@@ -54,6 +57,37 @@ export default function Pricing({ session, onOpenAuth }: PricingProps) {
         { userId: user.id, email: user.email ?? undefined },
       )
     : ''
+
+  // Abonné : on remplace les cartes de prix par la gestion de l'abonnement.
+  if (user && isPremium) {
+    return (
+      <section id="tarifs" className="scroll-mt-20">
+        <div className="mx-auto max-w-3xl px-5 py-12 sm:py-16">
+          <div className="rounded-[2rem] bg-card p-8 text-center shadow-card ring-1 ring-bark sm:p-10">
+            <p className="text-4xl">🎉</p>
+            <h2 className="mt-3 font-display text-2xl font-black text-espresso sm:text-3xl">
+              Vous êtes abonné à « Les Carnets »
+            </h2>
+            <p className="mx-auto mt-3 max-w-lg text-base leading-7 text-hazel">
+              Votre abonnement débloque tous les carnets. Vous pouvez le gérer
+              (changer de carte, résilier) à tout moment depuis votre espace
+              client — résiliable sans engagement.
+            </p>
+
+            {portalUrl ? (
+              <Button href={portalUrl} size="lg" className="mt-7">
+                Gérer mon abonnement
+              </Button>
+            ) : (
+              <p className="mt-7 text-sm font-semibold text-hazel">
+                Accès offert — rien à gérer. Bonne dégustation !
+              </p>
+            )}
+          </div>
+        </div>
+      </section>
+    )
+  }
 
   return (
     <section id="tarifs" className="scroll-mt-20">
