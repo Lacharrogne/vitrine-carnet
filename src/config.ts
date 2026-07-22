@@ -132,9 +132,9 @@ export const PRICING = {
   /** Durée de l'essai gratuit, en jours. */
   trialDays: 14,
   premium: {
-    priceMonthly: '3,99 €',
+    priceMonthly: '5,99 €',
     periodMonthly: '/ mois',
-    priceYearly: '39,99 €',
+    priceYearly: '59,99 €',
     periodYearly: '/ an',
     yearlySavings: '2 mois offerts',
   },
