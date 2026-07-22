@@ -71,8 +71,8 @@ export const CARNETS: Carnet[] = [
       'Liste de courses par rayon',
       'Planning de la semaine',
     ],
-    url: 'https://carnet-de-recettes.vercel.app/',
-    signupUrl: 'https://carnet-de-recettes.vercel.app/auth',
+    url: 'https://recettes.lescarnets.app/',
+    signupUrl: 'https://recettes.lescarnets.app/auth',
   },
   {
     id: 'budget',
