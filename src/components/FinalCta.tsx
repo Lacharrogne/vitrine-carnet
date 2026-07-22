@@ -35,15 +35,12 @@ export default function FinalCta() {
               Découvrir les carnets
             </Button>
 
-            <Button
+            <a
               href="#tarifs"
-              external={false}
-              variant="ghost"
-              size="lg"
-              className="w-full border border-cream-100/40 text-cream-100 hover:bg-white/10 sm:w-auto"
+              className="inline-flex w-full items-center justify-center rounded-full border border-white/30 bg-white/10 px-7 py-4 font-bold text-white transition duration-200 hover:-translate-y-0.5 hover:bg-white/20 sm:w-auto"
             >
               Voir les tarifs
-            </Button>
+            </a>
           </div>
         </div>
       </div>
