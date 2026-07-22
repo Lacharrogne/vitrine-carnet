@@ -6,8 +6,8 @@ export default function FinalCta() {
   return (
     <section className="mx-auto max-w-6xl px-5 py-12 sm:py-16">
       <div className="relative overflow-hidden rounded-[2rem] bg-espresso px-6 py-12 text-center shadow-lift sm:rounded-[2.5rem] sm:px-10 sm:py-16">
-        <div className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-terracotta/30 blur-3xl" />
-        <div className="pointer-events-none absolute -bottom-20 -left-16 h-56 w-56 rounded-full bg-azure/20 blur-3xl" />
+        <div className="animate-glow pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-terracotta/30 blur-3xl" />
+        <div className="animate-glow pointer-events-none absolute -bottom-20 -left-16 h-56 w-56 rounded-full bg-azure/20 blur-3xl" />
 
         <div className="relative">
           <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-xs font-bold text-cream-100">

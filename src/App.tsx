@@ -13,6 +13,7 @@ import Faq from './components/Faq'
 import FinalCta from './components/FinalCta'
 import Footer from './components/Footer'
 import AuthModal from './components/AuthModal'
+import Reveal from './components/Reveal'
 import { useSession } from './lib/useSession'
 import { supabase } from './lib/supabase'
 
@@ -34,15 +35,17 @@ export default function App() {
 
       <main>
         <Hero />
-        <ProblemSolution />
-        <Carnets />
-        <Features />
-        <Benefits />
-        <HowItWorks />
-        <Testimonials />
-        <Pricing session={session} onOpenAuth={() => setAuthOpen(true)} />
-        <Faq />
-        <FinalCta />
+        <Reveal><ProblemSolution /></Reveal>
+        <Reveal><Carnets /></Reveal>
+        <Reveal><Features /></Reveal>
+        <Reveal><Benefits /></Reveal>
+        <Reveal><HowItWorks /></Reveal>
+        <Reveal><Testimonials /></Reveal>
+        <Reveal>
+          <Pricing session={session} onOpenAuth={() => setAuthOpen(true)} />
+        </Reveal>
+        <Reveal><Faq /></Reveal>
+        <Reveal><FinalCta /></Reveal>
       </main>
 
       <Footer />

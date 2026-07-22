@@ -15,13 +15,14 @@ export default function SectionHeader({
 }: SectionHeaderProps) {
   return (
     <div className={centered ? 'mx-auto max-w-2xl text-center' : ''}>
-      <p
-        className={`text-sm font-bold uppercase tracking-[0.12em] ${eyebrowClassName}`}
+      <span
+        className={`inline-flex items-center gap-2 rounded-full bg-white/70 px-3.5 py-1.5 text-xs font-black uppercase tracking-[0.14em] shadow-soft ring-1 ring-bark ${eyebrowClassName}`}
       >
+        <span className="h-1.5 w-1.5 rounded-full bg-current" />
         {eyebrow}
-      </p>
+      </span>
 
-      <h2 className="mt-2 font-display text-3xl font-black leading-tight text-espresso sm:text-4xl">
+      <h2 className="mt-4 font-display text-3xl font-black leading-tight text-espresso sm:text-4xl">
         {title}
       </h2>
 

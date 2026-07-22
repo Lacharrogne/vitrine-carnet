@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Menu, X } from 'lucide-react'
 import type { Session } from '@supabase/supabase-js'
 
@@ -21,11 +21,25 @@ const NAV_LINKS = [
 
 export default function Navbar({ session, onOpenAuth, onLogout }: NavbarProps) {
   const [open, setOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
   const userEmail = session?.user.email ?? ''
 
   return (
-    <header className="sticky top-0 z-40 border-b border-bark/60 bg-card/80 backdrop-blur-md">
+    <header
+      className={`sticky top-0 z-40 border-b backdrop-blur-md transition-colors duration-300 ${
+        scrolled
+          ? 'border-bark/70 bg-card/90 shadow-card'
+          : 'border-bark/40 bg-card/70'
+      }`}
+    >
       <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-3.5">
         {/* Marque */}
         <a href="#top" className="flex items-center gap-2.5">

@@ -157,8 +157,89 @@ summary:focus-visible {
   animation: rise 0.6s ease both;
 }
 
+/* Apparition au défilement (via IntersectionObserver, cf. <Reveal/>) */
+.reveal-init {
+  opacity: 0;
+  transform: translateY(26px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.75s cubic-bezier(0.22, 0.7, 0.2, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* Flottement doux (mockups & éléments décoratifs) */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 6.5s ease-in-out infinite;
+}
+
+/* Lueurs qui respirent */
+@keyframes glow-pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.animate-glow {
+  animation: glow-pulse 8s ease-in-out infinite;
+}
+
+/* Titre en dégradé chaleureux (terracotta → miel) */
+.text-gradient-warm {
+  background-image: linear-gradient(
+    115deg,
+    #c2683d 0%,
+    #d99a4e 55%,
+    #c2683d 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Filet décoratif sous un titre */
+.underline-hand {
+  position: relative;
+}
+.underline-hand::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.35em;
+  height: 0.32em;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(217, 154, 78, 0.5), rgba(194, 104, 61, 0.55));
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .reveal {
+  .reveal,
+  .reveal-init {
+    animation: none;
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .animate-float,
+  .animate-glow {
     animation: none;
   }
   html {

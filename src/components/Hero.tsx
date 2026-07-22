@@ -31,10 +31,13 @@ export default function Hero() {
               L’écosystème « Carnet »
             </span>
 
-            <h1 className="mt-5 font-display text-4xl font-black leading-[1.08] text-espresso sm:text-5xl lg:text-6xl">
+            <h1 className="mt-5 font-display text-4xl font-black leading-[1.08] text-espresso sm:text-5xl lg:text-[4rem]">
               Une vie organisée,
               <br />
-              <span className="text-terracotta">carnet après carnet</span>.
+              <span className="underline-hand text-gradient-warm">
+                carnet après carnet
+              </span>
+              .
             </h1>
 
             <p className="mt-5 max-w-xl text-lg leading-8 text-cacao/80">
@@ -77,15 +80,15 @@ export default function Hero() {
 
           {/* ── Aperçu de l'écosystème ── */}
           <div className="reveal relative mx-auto w-full max-w-sm lg:mx-0">
-            <div className="pointer-events-none absolute -left-10 -top-10 h-48 w-48 rounded-full bg-terracotta/15 blur-3xl" />
-            <div className="pointer-events-none absolute -bottom-10 -right-10 h-48 w-48 rounded-full bg-azure/15 blur-3xl" />
+            <div className="animate-glow pointer-events-none absolute -left-10 -top-10 h-48 w-48 rounded-full bg-terracotta/20 blur-3xl" />
+            <div className="animate-glow pointer-events-none absolute -bottom-10 -right-10 h-48 w-48 rounded-full bg-azure/20 blur-3xl" />
 
             <div className="absolute -right-3 -top-3 z-10 flex items-center gap-1.5 rounded-full bg-espresso px-3 py-1.5 shadow-lift">
               <Sparkles className="h-3 w-3 text-honey" />
               <span className="text-xs font-black text-white">3 carnets</span>
             </div>
 
-            <div className="relative rounded-[2rem] bg-linen p-4 shadow-lift ring-1 ring-bark">
+            <div className="animate-float relative rounded-[2rem] bg-linen p-4 shadow-lift ring-1 ring-bark">
               {/* En-tête mockup */}
               <div className="mb-4 flex items-center justify-between px-1">
                 <div>
