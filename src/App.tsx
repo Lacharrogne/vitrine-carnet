@@ -40,7 +40,7 @@ export default function App() {
         <Benefits />
         <HowItWorks />
         <Testimonials />
-        <Pricing />
+        <Pricing session={session} onOpenAuth={() => setAuthOpen(true)} />
         <Faq />
         <FinalCta />
       </main>

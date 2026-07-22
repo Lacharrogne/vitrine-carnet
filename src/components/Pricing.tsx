@@ -1,9 +1,20 @@
 import { useState } from 'react'
 import { Check, Sparkles } from 'lucide-react'
+import type { Session } from '@supabase/supabase-js'
 
 import { PRICING } from '../config'
+import {
+  IS_BILLING_CONFIGURED,
+  LEMONSQUEEZY,
+  buildCheckoutUrl,
+} from '../lib/subscription'
 import Button from './Button'
 import SectionHeader from './SectionHeader'
+
+type PricingProps = {
+  session: Session | null
+  onOpenAuth: () => void
+}
 
 /**
  * Tout est inclus, aussi bien pendant l'essai gratuit qu'avec l'abonnement.
@@ -25,7 +36,7 @@ const REASSURANCE = [
   '🔐 Vos données restent privées',
 ]
 
-export default function Pricing() {
+export default function Pricing({ session, onOpenAuth }: PricingProps) {
   const [yearly, setYearly] = useState(false)
 
   const premiumPrice = yearly
@@ -34,6 +45,15 @@ export default function Pricing() {
   const premiumPeriod = yearly
     ? PRICING.premium.periodYearly
     : PRICING.premium.periodMonthly
+
+  const user = session?.user ?? null
+
+  const checkoutUrl = user
+    ? buildCheckoutUrl(
+        yearly ? LEMONSQUEEZY.yearlyUrl : LEMONSQUEEZY.monthlyUrl,
+        { userId: user.id, email: user.email ?? undefined },
+      )
+    : ''
 
   return (
     <section id="tarifs" className="scroll-mt-20">
@@ -130,15 +150,26 @@ export default function Pricing() {
             </ul>
 
             <div className="mt-auto pt-8">
-              <Button
-                href="#carnets"
-                external={false}
-                variant="secondary"
-                size="lg"
-                fullWidth
-              >
-                Commencer l'essai gratuit
-              </Button>
+              {user ? (
+                <Button
+                  href="#carnets"
+                  external={false}
+                  variant="secondary"
+                  size="lg"
+                  fullWidth
+                >
+                  Ouvrir mes carnets
+                </Button>
+              ) : (
+                <Button
+                  variant="secondary"
+                  size="lg"
+                  fullWidth
+                  onClick={onOpenAuth}
+                >
+                  Commencer l'essai gratuit
+                </Button>
+              )}
             </div>
           </div>
 
@@ -193,9 +224,27 @@ export default function Pricing() {
               </ul>
 
               <div className="mt-auto pt-8">
-                <Button href="#carnets" external={false} variant="honey" size="lg" fullWidth>
-                  Commencer l'essai gratuit
-                </Button>
+                {IS_BILLING_CONFIGURED && user ? (
+                  <Button
+                    href={checkoutUrl}
+                    variant="honey"
+                    size="lg"
+                    fullWidth
+                  >
+                    S'abonner
+                  </Button>
+                ) : (
+                  <Button
+                    variant="honey"
+                    size="lg"
+                    fullWidth
+                    onClick={onOpenAuth}
+                  >
+                    {IS_BILLING_CONFIGURED
+                      ? "Créer un compte pour s'abonner"
+                      : "Commencer l'essai gratuit"}
+                  </Button>
+                )}
 
                 <p className="mt-3 text-center text-xs font-semibold text-cream-100/70">
                   Essai de {PRICING.trialDays} jours, puis {premiumPrice}{' '}
