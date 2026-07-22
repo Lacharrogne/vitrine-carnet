@@ -1,8 +1,15 @@
 import { useState } from 'react'
 import { Menu, X } from 'lucide-react'
+import type { Session } from '@supabase/supabase-js'
 
 import { BRAND } from '../config'
 import Button from './Button'
+
+type NavbarProps = {
+  session: Session | null
+  onOpenAuth: () => void
+  onLogout: () => void
+}
 
 const NAV_LINKS = [
   { label: 'Les carnets', href: '#carnets' },
@@ -12,8 +19,10 @@ const NAV_LINKS = [
   { label: 'Questions', href: '#faq' },
 ]
 
-export default function Navbar() {
+export default function Navbar({ session, onOpenAuth, onLogout }: NavbarProps) {
   const [open, setOpen] = useState(false)
+
+  const userEmail = session?.user.email ?? ''
 
   return (
     <header className="sticky top-0 z-40 border-b border-bark/60 bg-card/80 backdrop-blur-md">
@@ -45,9 +54,25 @@ export default function Navbar() {
 
         {/* CTA desktop */}
         <div className="hidden items-center gap-3 lg:flex">
-          <Button href="#carnets" external={false} size="md">
-            Découvrir les carnets
-          </Button>
+          {session ? (
+            <>
+              <span className="max-w-[12rem] truncate text-sm font-bold text-cacao/80">
+                {userEmail}
+              </span>
+              <Button variant="secondary" size="md" onClick={onLogout}>
+                Se déconnecter
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button variant="secondary" size="md" onClick={onOpenAuth}>
+                Se connecter
+              </Button>
+              <Button size="md" onClick={onOpenAuth}>
+                Créer un compte
+              </Button>
+            </>
+          )}
         </div>
 
         {/* Burger mobile */}
@@ -79,15 +104,48 @@ export default function Navbar() {
           </nav>
 
           <div className="mt-3 grid gap-2">
-            <Button
-              href="#carnets"
-              external={false}
-              size="lg"
-              fullWidth
-              onClick={() => setOpen(false)}
-            >
-              Découvrir les carnets
-            </Button>
+            {session ? (
+              <>
+                <span className="truncate px-3 text-sm font-bold text-cacao/80">
+                  {userEmail}
+                </span>
+                <Button
+                  variant="secondary"
+                  size="lg"
+                  fullWidth
+                  onClick={() => {
+                    setOpen(false)
+                    onLogout()
+                  }}
+                >
+                  Se déconnecter
+                </Button>
+              </>
+            ) : (
+              <>
+                <Button
+                  size="lg"
+                  fullWidth
+                  onClick={() => {
+                    setOpen(false)
+                    onOpenAuth()
+                  }}
+                >
+                  Créer un compte
+                </Button>
+                <Button
+                  variant="secondary"
+                  size="lg"
+                  fullWidth
+                  onClick={() => {
+                    setOpen(false)
+                    onOpenAuth()
+                  }}
+                >
+                  Se connecter
+                </Button>
+              </>
+            )}
           </div>
         </div>
       )}

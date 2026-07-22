@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import ProblemSolution from './components/ProblemSolution'
@@ -10,11 +12,25 @@ import Pricing from './components/Pricing'
 import Faq from './components/Faq'
 import FinalCta from './components/FinalCta'
 import Footer from './components/Footer'
+import AuthModal from './components/AuthModal'
+import { useSession } from './lib/useSession'
+import { supabase } from './lib/supabase'
 
 export default function App() {
+  const { session } = useSession()
+  const [authOpen, setAuthOpen] = useState(false)
+
+  async function handleLogout() {
+    await supabase?.auth.signOut()
+  }
+
   return (
     <div className="paper-grain min-h-screen">
-      <Navbar />
+      <Navbar
+        session={session}
+        onOpenAuth={() => setAuthOpen(true)}
+        onLogout={handleLogout}
+      />
 
       <main>
         <Hero />
@@ -30,6 +46,8 @@ export default function App() {
       </main>
 
       <Footer />
+
+      {authOpen && <AuthModal onClose={() => setAuthOpen(false)} />}
     </div>
   )
 }
