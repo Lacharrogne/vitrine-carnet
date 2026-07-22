@@ -37,7 +37,7 @@ export default function FinalCta() {
 
             <a
               href="#tarifs"
-              className="inline-flex w-full items-center justify-center rounded-full border border-white/30 bg-white/10 px-7 py-4 font-bold text-white transition duration-200 hover:-translate-y-0.5 hover:bg-white/20 sm:w-auto"
+              className="inline-flex w-full items-center justify-center rounded-full bg-white px-7 py-4 font-bold text-espresso shadow-soft transition duration-200 hover:-translate-y-0.5 hover:bg-cream-100 sm:w-auto"
             >
               Voir les tarifs
             </a>
