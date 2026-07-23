@@ -32,7 +32,7 @@ export default function BrowserFrame({
         src={src}
         alt={alt}
         loading="lazy"
-        className="block max-h-[440px] w-full object-cover object-top"
+        className="block h-[300px] w-full object-cover object-top sm:h-[360px]"
       />
     </div>
   )
