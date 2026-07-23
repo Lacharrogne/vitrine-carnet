@@ -8,7 +8,7 @@ import Showcase from './components/Showcase'
 import Features from './components/Features'
 import Benefits from './components/Benefits'
 import HowItWorks from './components/HowItWorks'
-import Testimonials from './components/Testimonials'
+import FounderNote from './components/FounderNote'
 import Pricing from './components/Pricing'
 import Faq from './components/Faq'
 import FinalCta from './components/FinalCta'
@@ -42,7 +42,7 @@ export default function App() {
         <Reveal><Features /></Reveal>
         <Reveal><Benefits /></Reveal>
         <Reveal><HowItWorks /></Reveal>
-        <Reveal><Testimonials /></Reveal>
+        <Reveal><FounderNote /></Reveal>
         <Reveal>
           <Pricing session={session} onOpenAuth={() => setAuthMode('signup')} />
         </Reveal>
