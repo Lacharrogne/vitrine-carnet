@@ -3,7 +3,7 @@ import SectionHeader from './SectionHeader'
 
 const SHOTS = [
   {
-    src: '/shots/recettes.png',
+    src: '/shot-recettes.png',
     alt: 'Aperçu du Carnet de recettes',
     url: 'recettes.lescarnets.app',
     name: 'Carnet de recettes',
@@ -11,7 +11,7 @@ const SHOTS = [
     accent: 'text-terracotta',
   },
   {
-    src: '/shots/budget.png',
+    src: '/shot-budget.png',
     alt: 'Aperçu du Carnet de budget',
     url: 'budget.lescarnets.app',
     name: 'Carnet de budget',
