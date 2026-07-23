@@ -4,6 +4,7 @@ import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import ProblemSolution from './components/ProblemSolution'
 import Carnets from './components/Carnets'
+import Showcase from './components/Showcase'
 import Features from './components/Features'
 import Benefits from './components/Benefits'
 import HowItWorks from './components/HowItWorks'
@@ -37,6 +38,7 @@ export default function App() {
         <Hero />
         <Reveal><ProblemSolution /></Reveal>
         <Reveal><Carnets /></Reveal>
+        <Reveal><Showcase /></Reveal>
         <Reveal><Features /></Reveal>
         <Reveal><Benefits /></Reveal>
         <Reveal><HowItWorks /></Reveal>
