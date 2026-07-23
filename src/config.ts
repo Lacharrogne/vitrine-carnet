@@ -88,8 +88,8 @@ export const CARNETS: Carnet[] = [
       'Budgets & alertes en douceur',
       'Épargne, objectifs & patrimoine',
     ],
-    url: 'https://carnet-de-budget.vercel.app/',
-    signupUrl: 'https://carnet-de-budget.vercel.app/auth',
+    url: 'https://budget.lescarnets.app/',
+    signupUrl: 'https://budget.lescarnets.app/auth',
   },
   {
     id: 'sport',
