@@ -47,8 +47,13 @@ export default function Hero() {
               même langue.
             </p>
 
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Button href="#carnets" external={false} size="lg">
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+              <Button
+                href="#carnets"
+                external={false}
+                size="lg"
+                className="w-full sm:w-auto"
+              >
                 Découvrir les carnets
                 <ArrowRight className="h-4 w-4" />
               </Button>
@@ -58,6 +63,7 @@ export default function Hero() {
                 external={false}
                 variant="secondary"
                 size="lg"
+                className="w-full sm:w-auto"
               >
                 Pourquoi Les Carnets
               </Button>
