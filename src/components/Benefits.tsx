@@ -1,29 +1,29 @@
-import { Heart, LayoutGrid, ShieldCheck, Sparkles } from 'lucide-react'
+import { CreditCard, KeyRound, PlusCircle, RefreshCw } from 'lucide-react'
 
 const BENEFITS = [
   {
-    icon: LayoutGrid,
-    title: 'Tout au même endroit',
+    icon: KeyRound,
+    title: 'Un seul compte',
     description:
-      'Vos recettes, votre budget, votre forme : un seul esprit, des carnets qui se parlent. Fini de chercher dans dix applis.',
+      'Connectez-vous une fois : vous êtes chez vous dans tous les carnets, sans jamais ressaisir vos identifiants.',
   },
   {
-    icon: Heart,
-    title: 'Clair et rassurant',
+    icon: CreditCard,
+    title: 'Un seul abonnement',
     description:
-      'Des chiffres et des suivis présentés avec douceur, pour vous éclairer sans jamais vous culpabiliser.',
+      'Un abonnement débloque tous les carnets — pas besoin de payer chaque application séparément.',
   },
   {
-    icon: Sparkles,
-    title: 'Beau au quotidien',
+    icon: RefreshCw,
+    title: 'Tout synchronisé',
     description:
-      'Une interface premium, calme et soignée, agréable à ouvrir chaque jour — parce que le quotidien mérite du beau.',
+      'Vos données réunies et toujours à jour, sur téléphone comme sur ordinateur, sans rien installer.',
   },
   {
-    icon: ShieldCheck,
-    title: 'Vos données privées',
+    icon: PlusCircle,
+    title: 'La suite s’agrandit',
     description:
-      'Sans publicité, sans revente. Ce que vous notez reste à vous, protégé et en sécurité.',
+      'De nouveaux carnets arrivent et rejoignent votre abonnement, sans rien changer pour vous.',
   },
 ]
 
@@ -37,10 +37,10 @@ export default function Benefits() {
 
           <div className="relative">
             <p className="text-sm font-bold uppercase tracking-[0.12em] text-honey">
-              Les bénéfices au quotidien
+              L’avantage de la suite
             </p>
             <h2 className="mt-2 max-w-2xl font-display text-3xl font-black leading-tight text-white sm:text-4xl">
-              Plus que des applis, un quotidien plus calme
+              Un compte, un abonnement, tous vos carnets
             </h2>
 
             <div className="mt-9 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
