@@ -39,7 +39,7 @@ export default function Showcase() {
           subtitle="Le même soin dans chaque carnet — une interface douce et lisible, pensée pour que tout soit à portée de main."
         />
 
-        <div className="mt-9 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mx-auto mt-9 max-w-4xl space-y-12">
           {SHOTS.map((shot) => (
             <figure key={shot.src} className="flex flex-col">
               <BrowserFrame
