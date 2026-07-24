@@ -18,6 +18,14 @@ const SHOTS = [
     tagline: 'Un vrai cockpit financier : comptes, budgets, épargne et objectifs.',
     accent: 'text-sage-deep',
   },
+  {
+    src: '/shot-sport.png',
+    alt: 'Aperçu du Carnet de sport',
+    url: 'sport.lescarnets.app',
+    name: 'Carnet de sport',
+    tagline: 'Vos séances, votre progression et vos objectifs, dans un carnet qui motive.',
+    accent: 'text-azure-deep',
+  },
 ]
 
 export default function Showcase() {
@@ -31,7 +39,7 @@ export default function Showcase() {
           subtitle="Le même soin dans chaque carnet — une interface douce et lisible, pensée pour que tout soit à portée de main."
         />
 
-        <div className="mt-9 grid gap-8 lg:grid-cols-2">
+        <div className="mt-9 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {SHOTS.map((shot) => (
             <figure key={shot.src} className="flex flex-col">
               <BrowserFrame
