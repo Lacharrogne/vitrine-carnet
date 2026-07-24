@@ -40,6 +40,8 @@ export interface Carnet {
   /** Une à deux phrases, ce que le carnet fait pour l'utilisateur. */
   description: string
   emoji: string
+  /** Logo illustré du carnet (personnage « Chloé »), servi depuis /public. */
+  logo: string
   accent: CarnetAccent
   status: CarnetStatus
   /** 3 points forts affichés sur la carte. */
@@ -64,6 +66,7 @@ export const CARNETS: Carnet[] = [
     description:
       'Réunissez vos recettes, planifiez vos repas et préparez vos courses — tout dans un seul carnet, simple et chaleureux.',
     emoji: '🍳',
+    logo: '/logo-recettes.png',
     accent: 'terracotta',
     status: 'live',
     highlights: [
@@ -81,6 +84,7 @@ export const CARNETS: Carnet[] = [
     description:
       'La puissance d’un tableur, sans la complexité d’Excel. Suivez revenus, dépenses, budgets et épargne, et sachez toujours où vous en êtes.',
     emoji: '🪙',
+    logo: '/logo-budget.png',
     accent: 'sage',
     status: 'live',
     highlights: [
@@ -98,6 +102,7 @@ export const CARNETS: Carnet[] = [
     description:
       'Planifiez vos séances, suivez vos progrès et gardez le rythme. Un carnet d’entraînement clair qui vous motive sans vous juger.',
     emoji: '🏃',
+    logo: '/logo-sport.png',
     accent: 'azure',
     status: 'live',
     highlights: [

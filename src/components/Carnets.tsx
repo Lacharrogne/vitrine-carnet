@@ -73,18 +73,19 @@ export default function Carnets() {
             return (
               <article
                 key={carnet.id}
-                className={`relative flex flex-col overflow-hidden rounded-card bg-card p-6 shadow-card ring-1 transition duration-300 hover:-translate-y-1 hover:shadow-lift ${accent.ring}`}
+                className={`group relative flex flex-col overflow-hidden rounded-card bg-card p-6 shadow-card ring-1 transition duration-300 hover:-translate-y-1 hover:shadow-lift ${accent.ring}`}
               >
                 <div
                   className={`pointer-events-none absolute -right-12 -top-12 h-40 w-40 rounded-full blur-3xl ${accent.glow}`}
                 />
 
                 <div className="relative flex items-center justify-between gap-3">
-                  <span
-                    className={`flex h-14 w-14 items-center justify-center rounded-2xl text-3xl ${accent.emoji}`}
-                  >
-                    {carnet.emoji}
-                  </span>
+                  <img
+                    src={carnet.logo}
+                    alt={carnet.name}
+                    loading="lazy"
+                    className="h-16 w-16 shrink-0 object-contain drop-shadow-sm transition duration-300 group-hover:scale-105"
+                  />
 
                   <span
                     className={`rounded-full px-3 py-1 text-xs font-black ${
