@@ -46,7 +46,7 @@ export default function Navbar({ session, onOpenAuth, onLogout }: NavbarProps) {
           <img
             src={BRAND.logo}
             alt={BRAND.name}
-            className="h-10 w-10 object-contain"
+            className="h-12 w-12 object-contain drop-shadow-sm"
           />
           <span className="font-display text-lg font-black text-espresso">
             {BRAND.name}

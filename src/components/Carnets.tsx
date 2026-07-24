@@ -84,7 +84,7 @@ export default function Carnets() {
                     src={carnet.logo}
                     alt={carnet.name}
                     loading="lazy"
-                    className="h-16 w-16 shrink-0 object-contain drop-shadow-sm transition duration-300 group-hover:scale-105"
+                    className="h-20 w-20 shrink-0 object-contain drop-shadow-sm transition duration-300 group-hover:scale-105"
                   />
 
                   <span

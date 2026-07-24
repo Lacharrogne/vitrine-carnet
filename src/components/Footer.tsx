@@ -34,7 +34,7 @@ export default function Footer() {
             <img
               src={BRAND.logo}
               alt={BRAND.name}
-              className="h-11 w-11 object-contain"
+              className="h-14 w-14 object-contain"
             />
             <div>
               <p className="font-display font-black text-espresso">
