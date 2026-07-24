@@ -7,6 +7,7 @@ import Button from './Button'
 
 type NavbarProps = {
   session: Session | null
+  isAdmin?: boolean
   onOpenAuth: (mode: 'login' | 'signup') => void
   onLogout: () => void
 }
@@ -19,7 +20,12 @@ const NAV_LINKS = [
   { label: 'Questions', href: '#faq' },
 ]
 
-export default function Navbar({ session, onOpenAuth, onLogout }: NavbarProps) {
+export default function Navbar({
+  session,
+  isAdmin = false,
+  onOpenAuth,
+  onLogout,
+}: NavbarProps) {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
 
@@ -70,6 +76,14 @@ export default function Navbar({ session, onOpenAuth, onLogout }: NavbarProps) {
         <div className="hidden items-center gap-3 lg:flex">
           {session ? (
             <>
+              {isAdmin && (
+                <a
+                  href="#admin"
+                  className="rounded-full bg-espresso px-4 py-2 text-sm font-black text-white transition hover:-translate-y-0.5"
+                >
+                  Admin
+                </a>
+              )}
               <span className="max-w-[12rem] truncate text-sm font-bold text-cacao/80">
                 {userEmail}
               </span>
@@ -124,6 +138,15 @@ export default function Navbar({ session, onOpenAuth, onLogout }: NavbarProps) {
           <div className="mt-3 grid gap-2">
             {session ? (
               <>
+                {isAdmin && (
+                  <a
+                    href="#admin"
+                    onClick={() => setOpen(false)}
+                    className="rounded-xl bg-espresso px-3 py-2.5 text-center font-black text-white"
+                  >
+                    Console admin
+                  </a>
+                )}
                 <span className="truncate px-3 text-sm font-bold text-cacao/80">
                   {userEmail}
                 </span>
