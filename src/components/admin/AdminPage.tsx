@@ -78,6 +78,9 @@ export default function AdminPage({ email }: AdminPageProps) {
   const [overview, setOverview] = useState<AdminOverview | null>(null)
   const [users, setUsers] = useState<AdminUser[]>([])
   const [query, setQuery] = useState('')
+  const [filterMode, setFilterMode] = useState<
+    'all' | 'premium' | 'comp' | 'admin'
+  >('all')
   const [busy, setBusy] = useState<string | null>(null)
 
   const load = useCallback(async () => {
@@ -104,13 +107,86 @@ export default function AdminPage({ email }: AdminPageProps) {
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase()
-    if (!q) return users
-    return users.filter(
-      (u) =>
+    return users.filter((u) => {
+      const matchesQuery =
+        !q ||
         u.email.toLowerCase().includes(q) ||
-        (u.username ?? '').toLowerCase().includes(q),
-    )
-  }, [users, query])
+        (u.username ?? '').toLowerCase().includes(q)
+
+      const matchesMode =
+        filterMode === 'all' ||
+        (filterMode === 'premium' &&
+          (u.sub_status === 'active' || u.sub_status === 'on_trial')) ||
+        (filterMode === 'comp' && u.sub_source === 'comp') ||
+        (filterMode === 'admin' && u.role === 'admin')
+
+      return matchesQuery && matchesMode
+    })
+  }, [users, query, filterMode])
+
+  // Revenu mensuel estimé : abonnements payants (hors accès offerts) × 5,99 €.
+  const estimatedRevenue = useMemo(() => {
+    const paying = users.filter(
+      (u) =>
+        (u.sub_status === 'active' || u.sub_status === 'on_trial') &&
+        u.sub_source !== 'comp',
+    ).length
+    return paying * 5.99
+  }, [users])
+
+  // Nouveaux comptes sur les 7 derniers jours.
+  const newThisWeek = useMemo(() => {
+    const weekAgo = Date.now() - 7 * 24 * 60 * 60 * 1000
+    return users.filter((u) => new Date(u.created_at).getTime() >= weekAgo)
+      .length
+  }, [users])
+
+  function exportCsv() {
+    const header = [
+      'email',
+      'pseudo',
+      'role',
+      'statut',
+      'source',
+      'inscrit_le',
+      'recettes',
+      'transactions',
+      'seances',
+    ]
+    const rows = filtered.map((u) => [
+      u.email,
+      u.username ?? '',
+      u.role,
+      u.sub_status,
+      u.sub_source,
+      u.created_at,
+      u.recipes_count,
+      u.transactions_count,
+      u.workouts_count,
+    ])
+    const csv = [header, ...rows]
+      .map((r) => r.map((c) => `"${String(c).replace(/"/g, '""')}"`).join(','))
+      .join('\n')
+    const blob = new Blob([`﻿${csv}`], { type: 'text/csv;charset=utf-8' })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = `les-carnets-utilisateurs-${new Date().toISOString().slice(0, 10)}.csv`
+    a.click()
+    URL.revokeObjectURL(url)
+  }
+
+  function formatDate(value: string) {
+    try {
+      return new Intl.DateTimeFormat('fr-FR', {
+        day: '2-digit',
+        month: 'short',
+        year: 'numeric',
+      }).format(new Date(value))
+    } catch {
+      return '—'
+    }
+  }
 
   async function run(userId: string, action: () => Promise<void>) {
     setBusy(userId)
@@ -164,18 +240,28 @@ export default function AdminPage({ email }: AdminPageProps) {
       )}
 
       {/* KPIs */}
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
         <StatCard label="Utilisateurs" value={overview?.users_total ?? 0} />
         <StatCard
           label="Premium"
           value={overview?.premium ?? 0}
           accent="text-sage-deep"
-          hint="Abonnements actifs / essais"
+        />
+        <StatCard
+          label="Revenu / mois"
+          value={`${estimatedRevenue.toFixed(2).replace('.', ',')} €`}
+          accent="text-terracotta"
+          hint="Estimation (payants × 5,99 €)"
         />
         <StatCard
           label="Accès offerts"
           value={overview?.comp ?? 0}
           accent="text-[#8a6a1e]"
+        />
+        <StatCard
+          label="Nouveaux (7 j)"
+          value={newThisWeek}
+          accent="text-azure-deep"
         />
         <StatCard label="Admins" value={overview?.admins ?? 0} />
       </div>
@@ -211,13 +297,47 @@ export default function AdminPage({ email }: AdminPageProps) {
         <h2 className="font-display text-lg font-black text-espresso">
           Utilisateurs ({filtered.length})
         </h2>
-        <input
-          type="search"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          placeholder="Rechercher un e-mail ou un pseudo…"
-          className="w-full max-w-xs rounded-full border border-bark bg-card px-4 py-2 text-sm font-semibold text-espresso outline-none transition focus:ring-2 focus:ring-terracotta/40 sm:w-72"
-        />
+
+        <div className="flex flex-wrap items-center gap-2">
+          <input
+            type="search"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Rechercher…"
+            className="w-full max-w-xs rounded-full border border-bark bg-card px-4 py-2 text-sm font-semibold text-espresso outline-none transition focus:ring-2 focus:ring-terracotta/40 sm:w-56"
+          />
+          <button
+            type="button"
+            onClick={exportCsv}
+            className="rounded-full border border-bark bg-card px-4 py-2 text-sm font-bold text-espresso transition hover:bg-linen"
+          >
+            Export CSV
+          </button>
+        </div>
+      </div>
+
+      <div className="mt-3 flex flex-wrap gap-2">
+        {(
+          [
+            ['all', 'Tous'],
+            ['premium', 'Premium'],
+            ['comp', 'Offerts'],
+            ['admin', 'Admins'],
+          ] as const
+        ).map(([mode, label]) => (
+          <button
+            key={mode}
+            type="button"
+            onClick={() => setFilterMode(mode)}
+            className={`rounded-full px-4 py-1.5 text-sm font-bold transition ${
+              filterMode === mode
+                ? 'bg-espresso text-white'
+                : 'bg-linen text-cacao hover:bg-cream-300'
+            }`}
+          >
+            {label}
+          </button>
+        ))}
       </div>
 
       <div className="mt-3 overflow-x-auto rounded-2xl border border-bark bg-card shadow-soft">
@@ -253,6 +373,9 @@ export default function AdminPage({ email }: AdminPageProps) {
                       )}
                     </p>
                     <p className="text-xs text-cacao/70">{u.email}</p>
+                    <p className="mt-0.5 text-[0.65rem] font-semibold text-hazel">
+                      Inscrit le {formatDate(u.created_at)}
+                    </p>
                   </td>
                   <td className="px-4 py-3">
                     <SubBadge status={u.sub_status} source={u.sub_source} />

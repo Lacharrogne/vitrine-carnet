@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Menu, X } from 'lucide-react'
+import { Menu, ShieldCheck, X } from 'lucide-react'
 import type { Session } from '@supabase/supabase-js'
 
 import { BRAND } from '../config'
@@ -79,8 +79,9 @@ export default function Navbar({
               {isAdmin && (
                 <a
                   href="#admin"
-                  className="rounded-full bg-espresso px-4 py-2 text-sm font-black text-white transition hover:-translate-y-0.5"
+                  className="inline-flex items-center gap-2 rounded-full border border-terracotta/30 bg-terracotta-soft px-4 py-2 text-sm font-black text-terracotta-deep shadow-sm transition hover:-translate-y-0.5 hover:bg-terracotta hover:text-white"
                 >
+                  <ShieldCheck className="h-4 w-4" />
                   Admin
                 </a>
               )}
@@ -142,8 +143,9 @@ export default function Navbar({
                   <a
                     href="#admin"
                     onClick={() => setOpen(false)}
-                    className="rounded-xl bg-espresso px-3 py-2.5 text-center font-black text-white"
+                    className="flex items-center justify-center gap-2 rounded-xl border border-terracotta/30 bg-terracotta-soft px-3 py-2.5 text-center font-black text-terracotta-deep"
                   >
+                    <ShieldCheck className="h-4 w-4" />
                     Console admin
                   </a>
                 )}
