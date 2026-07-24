@@ -12,7 +12,7 @@ const FAQ_ITEMS = [
   {
     question: 'Quels carnets existent aujourd’hui ?',
     answer:
-      "Deux carnets sont déjà en ligne : le Carnet de recettes et le Carnet de budget. Le Carnet de sport arrive très bientôt.",
+      'Les trois carnets sont en ligne : le Carnet de recettes, le Carnet de budget et le Carnet de sport. D’autres viendront agrandir la suite au fil du temps.',
   },
   {
     question: 'Dois-je créer un compte par carnet ?',

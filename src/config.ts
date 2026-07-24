@@ -99,17 +99,14 @@ export const CARNETS: Carnet[] = [
       'Planifiez vos séances, suivez vos progrès et gardez le rythme. Un carnet d’entraînement clair qui vous motive sans vous juger.',
     emoji: '🏃',
     accent: 'azure',
-    status: 'soon',
+    status: 'live',
     highlights: [
       'Séances & programmes',
       'Suivi des progrès',
       'Objectifs motivants',
     ],
-    // Déployé mais pas encore finalisé : on n'envoie pas les visiteurs
-    // vers une app incomplète. Repasser en 'live' + renseigner les URLs
-    // une fois le Carnet de sport prêt.
-    url: null,
-    signupUrl: null,
+    url: 'https://sport.lescarnets.app/',
+    signupUrl: 'https://sport.lescarnets.app/auth',
   },
 ]
 
