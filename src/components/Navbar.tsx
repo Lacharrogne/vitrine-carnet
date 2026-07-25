@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
-import { Menu, ShieldCheck, X } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
+import { LogOut, Menu, ShieldCheck, X } from 'lucide-react'
 import type { Session } from '@supabase/supabase-js'
 
 import { BRAND } from '../config'
@@ -28,6 +28,8 @@ export default function Navbar({
 }: NavbarProps) {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [accountOpen, setAccountOpen] = useState(false)
+  const accountRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8)
@@ -36,7 +38,19 @@ export default function Navbar({
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  useEffect(() => {
+    if (!accountOpen) return
+    const onClick = (event: MouseEvent) => {
+      if (accountRef.current && !accountRef.current.contains(event.target as Node)) {
+        setAccountOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', onClick)
+    return () => document.removeEventListener('mousedown', onClick)
+  }, [accountOpen])
+
   const userEmail = session?.user.email ?? ''
+  const initial = userEmail ? userEmail.charAt(0).toUpperCase() : '?'
 
   return (
     <header
@@ -78,25 +92,53 @@ export default function Navbar({
             <>
               <a
                 href="#hub"
-                className="inline-flex items-center gap-2 rounded-full border border-bark bg-card px-4 py-2 text-sm font-black text-cacao transition hover:-translate-y-0.5 hover:bg-linen"
+                className="inline-flex items-center gap-2 rounded-full bg-espresso px-5 py-2.5 text-sm font-black text-white shadow-soft transition hover:-translate-y-0.5 hover:bg-espresso/90"
               >
                 Mes carnets
               </a>
-              {isAdmin && (
-                <a
-                  href="#admin"
-                  className="inline-flex items-center gap-2 rounded-full border border-terracotta/30 bg-terracotta-soft px-4 py-2 text-sm font-black text-terracotta-deep shadow-sm transition hover:-translate-y-0.5 hover:bg-terracotta hover:text-white"
+
+              <div ref={accountRef} className="relative">
+                <button
+                  type="button"
+                  onClick={() => setAccountOpen((v) => !v)}
+                  className="flex h-10 w-10 items-center justify-center rounded-full bg-linen text-sm font-black text-espresso ring-1 ring-bark transition hover:bg-sand"
+                  aria-label="Mon compte"
+                  aria-expanded={accountOpen}
                 >
-                  <ShieldCheck className="h-4 w-4" />
-                  Admin
-                </a>
-              )}
-              <span className="max-w-[12rem] truncate text-sm font-bold text-cacao/80">
-                {userEmail}
-              </span>
-              <Button variant="secondary" size="md" onClick={onLogout}>
-                Se déconnecter
-              </Button>
+                  {initial}
+                </button>
+
+                {accountOpen && (
+                  <div className="absolute right-0 top-full mt-2 w-60 rounded-2xl border border-bark bg-card p-2 shadow-lift">
+                    <p className="truncate px-3 pb-2 pt-1 text-xs font-bold text-hazel">
+                      {userEmail}
+                    </p>
+
+                    {isAdmin && (
+                      <a
+                        href="#admin"
+                        onClick={() => setAccountOpen(false)}
+                        className="flex items-center gap-2 rounded-xl px-3 py-2.5 text-sm font-bold text-terracotta-deep transition hover:bg-terracotta-soft"
+                      >
+                        <ShieldCheck className="h-4 w-4" />
+                        Console admin
+                      </a>
+                    )}
+
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setAccountOpen(false)
+                        onLogout()
+                      }}
+                      className="mt-0.5 flex w-full items-center gap-2 rounded-xl px-3 py-2.5 text-sm font-bold text-cacao transition hover:bg-rose-50 hover:text-rose-700"
+                    >
+                      <LogOut className="h-4 w-4" />
+                      Se déconnecter
+                    </button>
+                  </div>
+                )}
+              </div>
             </>
           ) : (
             <>
