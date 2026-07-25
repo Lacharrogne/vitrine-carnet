@@ -83,6 +83,24 @@ Deno.serve(async (request) => {
     return new Response('No user_id in custom_data', { status: 200 })
   }
 
+  // Quel carnet la formule achetée débloque-t-elle ?
+  // LS_VARIANT_PLANS est un JSON { "<variant_id>": "recettes|budget|sport|all" }.
+  // Une variante non mappée → 'all' (fail-open : on ne verrouille jamais un
+  // client payant à cause d'une config oubliée).
+  const variantId = attributes.variant_id ? String(attributes.variant_id) : null
+  let plan = 'all'
+  try {
+    const variantPlans = JSON.parse(
+      Deno.env.get('LS_VARIANT_PLANS') ?? '{}',
+    ) as Record<string, string>
+    if (variantId && variantPlans[variantId]) {
+      plan = variantPlans[variantId]
+    }
+  } catch {
+    // JSON invalide → on garde 'all'.
+    plan = 'all'
+  }
+
   const supabase = createClient(
     Deno.env.get('SUPABASE_URL') ?? '',
     Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? '',
@@ -93,9 +111,8 @@ Deno.serve(async (request) => {
       user_id: userId,
       status: (attributes.status as string) ?? 'none',
       source: 'lemonsqueezy',
-      variant_id: attributes.variant_id
-        ? String(attributes.variant_id)
-        : null,
+      variant_id: variantId,
+      plan,
       ls_subscription_id: data.id ? String(data.id) : null,
       renews_at: (attributes.renews_at as string) ?? null,
       ends_at: (attributes.ends_at as string) ?? null,
