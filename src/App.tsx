@@ -16,6 +16,7 @@ import Footer from './components/Footer'
 import AuthModal from './components/AuthModal'
 import Reveal from './components/Reveal'
 import AdminPage from './components/admin/AdminPage'
+import HubPage from './components/hub/HubPage'
 import { useSession } from './lib/useSession'
 import { supabase } from './lib/supabase'
 import { getMyRole } from './lib/admin'
@@ -65,6 +66,44 @@ export default function App() {
 
   async function handleLogout() {
     await supabase?.auth.signOut()
+  }
+
+  // Mon espace / Hub d'abonnement (#hub).
+  if (hash === '#hub') {
+    if (!session) {
+      return (
+        <div className="paper-grain flex min-h-screen items-center justify-center px-5">
+          <div className="max-w-md rounded-2xl border border-bark bg-card p-8 text-center shadow-soft">
+            <p className="text-4xl">🔐</p>
+            <h1 className="mt-3 font-display text-2xl font-black text-espresso">
+              Mon espace
+            </h1>
+            <p className="mt-2 text-sm text-cacao/80">
+              Connectez-vous pour voir vos carnets et gérer votre abonnement.
+            </p>
+            <button
+              type="button"
+              onClick={() => setAuthMode('login')}
+              className="mt-5 rounded-full bg-espresso px-5 py-2.5 text-sm font-bold text-white transition hover:-translate-y-0.5"
+            >
+              Se connecter
+            </button>
+            <a href="#top" className="mt-3 block text-sm font-bold text-hazel">
+              Retour au site
+            </a>
+          </div>
+
+          {authMode && (
+            <AuthModal
+              initialMode={authMode}
+              onClose={() => setAuthMode(null)}
+            />
+          )}
+        </div>
+      )
+    }
+
+    return <HubPage session={session} />
   }
 
   // Console d'administration (#admin).

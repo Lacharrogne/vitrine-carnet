@@ -134,10 +134,15 @@ export const PRICING = {
   /** Durée de l'essai gratuit, en jours. */
   trialDays: 14,
   premium: {
-    priceMonthly: '5,99 €',
+    priceMonthly: '3,99 €',
     periodMonthly: '/ mois',
-    priceYearly: '59,99 €',
+    priceYearly: '39,99 €',
     periodYearly: '/ an',
     yearlySavings: '2 mois offerts',
+  },
+  /** Prix d'entrée pour un seul carnet (détaillé dans le Hub). */
+  single: {
+    priceMonthly: '2,49 €',
+    priceYearly: '24,99 €',
   },
 }

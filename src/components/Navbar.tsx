@@ -76,6 +76,12 @@ export default function Navbar({
         <div className="hidden items-center gap-3 lg:flex">
           {session ? (
             <>
+              <a
+                href="#hub"
+                className="inline-flex items-center gap-2 rounded-full border border-bark bg-card px-4 py-2 text-sm font-black text-cacao transition hover:-translate-y-0.5 hover:bg-linen"
+              >
+                Mes carnets
+              </a>
               {isAdmin && (
                 <a
                   href="#admin"
@@ -139,6 +145,13 @@ export default function Navbar({
           <div className="mt-3 grid gap-2">
             {session ? (
               <>
+                <a
+                  href="#hub"
+                  onClick={() => setOpen(false)}
+                  className="flex items-center justify-center gap-2 rounded-xl border border-bark bg-card px-3 py-2.5 text-center font-black text-cacao"
+                >
+                  Mes carnets
+                </a>
                 {isAdmin && (
                   <a
                     href="#admin"

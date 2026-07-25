@@ -289,6 +289,19 @@ export default function Pricing({ session, onOpenAuth }: PricingProps) {
           </div>
         </div>
 
+        {/* Carnet seul */}
+        <p className="mt-6 text-center text-sm font-semibold text-hazel">
+          Besoin d’un seul carnet ? Débloquez-le à partir de{' '}
+          <span className="font-black text-espresso">
+            {PRICING.single.priceMonthly}
+          </span>{' '}
+          / mois depuis{' '}
+          <a href="#hub" className="font-black text-terracotta underline">
+            votre espace
+          </a>
+          .
+        </p>
+
         {/* Réassurance */}
         <div className="mt-7 flex flex-wrap items-center justify-center gap-x-7 gap-y-2">
           {REASSURANCE.map((item) => (
