@@ -84,11 +84,16 @@ Deno.serve(async (request) => {
   }
 
   // Quel carnet la formule achetée débloque-t-elle ?
-  // LS_VARIANT_PLANS est un JSON { "<variant_id>": "recettes|budget|sport|all" }.
-  // Une variante non mappée → 'all' (fail-open : on ne verrouille jamais un
-  // client payant à cause d'une config oubliée).
+  // 1) Override explicite par variant_id via LS_VARIANT_PLANS (JSON facultatif).
+  // 2) Sinon, on déduit le plan du NOM DU PRODUIT (« Carnet de recettes — … »
+  //    → recettes, « Les Carnets … » → all). Simple et robuste : aucun ID de
+  //    variante à configurer.
+  // Fail-open : par défaut 'all' (jamais de client payant verrouillé par erreur).
   const variantId = attributes.variant_id ? String(attributes.variant_id) : null
-  let plan = 'all'
+  const productName = String(attributes.product_name ?? '').toLowerCase()
+
+  let plan: string | null = null
+
   try {
     const variantPlans = JSON.parse(
       Deno.env.get('LS_VARIANT_PLANS') ?? '{}',
@@ -97,8 +102,19 @@ Deno.serve(async (request) => {
       plan = variantPlans[variantId]
     }
   } catch {
-    // JSON invalide → on garde 'all'.
-    plan = 'all'
+    // JSON invalide → on ignore l'override.
+  }
+
+  if (!plan) {
+    if (productName.includes('recette')) {
+      plan = 'recettes'
+    } else if (productName.includes('budget')) {
+      plan = 'budget'
+    } else if (productName.includes('sport')) {
+      plan = 'sport'
+    } else {
+      plan = 'all'
+    }
   }
 
   const supabase = createClient(
