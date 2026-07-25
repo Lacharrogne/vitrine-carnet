@@ -4,8 +4,8 @@ import type { Session } from '@supabase/supabase-js'
 
 import { PRICING } from '../config'
 import {
+  CHECKOUT,
   IS_BILLING_CONFIGURED,
-  LEMONSQUEEZY,
   buildCheckoutUrl,
 } from '../lib/subscription'
 import { useSubscription } from '../lib/useSubscription'
@@ -52,10 +52,10 @@ export default function Pricing({ session, onOpenAuth }: PricingProps) {
   const user = session?.user ?? null
 
   const checkoutUrl = user
-    ? buildCheckoutUrl(
-        yearly ? LEMONSQUEEZY.yearlyUrl : LEMONSQUEEZY.monthlyUrl,
-        { userId: user.id, email: user.email ?? undefined },
-      )
+    ? buildCheckoutUrl(yearly ? CHECKOUT.all.yearly : CHECKOUT.all.monthly, {
+        userId: user.id,
+        email: user.email ?? undefined,
+      })
     : ''
 
   // Abonné : on remplace les cartes de prix par la gestion de l'abonnement.
