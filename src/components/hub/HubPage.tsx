@@ -46,6 +46,21 @@ export default function HubPage({ session }: HubPageProps) {
   const isCarnetAccessible = (id: string) =>
     trialActive || (isPremium && planGrantsCarnet(plan, id as CarnetId))
 
+  // État de l'abonnement (affichage).
+  const planLabel =
+    plan === 'recettes'
+      ? 'Carnet de recettes'
+      : plan === 'budget'
+        ? 'Carnet de budget'
+        : plan === 'sport'
+          ? 'Carnet de sport'
+          : 'Les Carnets'
+  const isCancelled = subscription?.status === 'cancelled'
+  const subEndsAt = subscription?.endsAt ? new Date(subscription.endsAt) : null
+  const subRenewsAt = subscription?.renewsAt
+    ? new Date(subscription.renewsAt)
+    : null
+
   return (
     <div className="paper-grain min-h-screen">
       <div className="mx-auto max-w-6xl px-5 py-8 sm:py-12">
@@ -91,13 +106,31 @@ export default function HubPage({ session }: HubPageProps) {
                   : 'Votre essai est terminé. Choisissez un carnet, ou débloquez tout.'}
           </p>
 
-          {isPremium && portalUrl ? (
-            <a
-              href={portalUrl}
-              className="mt-5 inline-flex items-center gap-2 rounded-full border border-bark bg-card px-5 py-2.5 text-sm font-bold text-cacao transition hover:bg-linen"
-            >
-              Gérer mon abonnement
-            </a>
+          {isPremium ? (
+            <div className="mt-5 flex flex-wrap items-center gap-3">
+              <span className="rounded-full bg-sage-soft px-3 py-1.5 text-xs font-black text-sage-deep">
+                Formule : {planLabel}
+              </span>
+
+              {isCancelled && subEndsAt ? (
+                <span className="rounded-full bg-honey-soft px-3 py-1.5 text-xs font-black text-[#9a6a26]">
+                  Résilié — accès jusqu’au {formatDate(subEndsAt)}
+                </span>
+              ) : subRenewsAt ? (
+                <span className="text-xs font-bold text-hazel">
+                  Renouvellement le {formatDate(subRenewsAt)}
+                </span>
+              ) : null}
+
+              {portalUrl ? (
+                <a
+                  href={portalUrl}
+                  className="inline-flex items-center gap-2 rounded-full border border-bark bg-card px-5 py-2 text-sm font-bold text-cacao transition hover:bg-linen"
+                >
+                  Gérer mon abonnement
+                </a>
+              ) : null}
+            </div>
           ) : null}
         </header>
 
@@ -290,7 +323,22 @@ export default function HubPage({ session }: HubPageProps) {
             </a>
           </section>
         ) : null}
+
+        {/* Réassurance */}
+        {!hasAll ? (
+          <p className="mt-6 text-center text-sm font-semibold text-hazel">
+            Sans engagement · résiliable à tout moment · paiement sécurisé
+          </p>
+        ) : null}
       </div>
     </div>
   )
+}
+
+function formatDate(date: Date) {
+  return new Intl.DateTimeFormat('fr-FR', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  }).format(date)
 }
