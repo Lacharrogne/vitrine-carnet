@@ -17,6 +17,7 @@ import AuthModal from './components/AuthModal'
 import Reveal from './components/Reveal'
 import AdminPage from './components/admin/AdminPage'
 import HubPage from './components/hub/HubPage'
+import LegalPage from './components/legal/LegalPage'
 import { useSession } from './lib/useSession'
 import { supabase } from './lib/supabase'
 import { getMyRole } from './lib/admin'
@@ -66,6 +67,17 @@ export default function App() {
 
   async function handleLogout() {
     await supabase?.auth.signOut()
+  }
+
+  // Pages légales (#cgu, #confidentialite, #mentions-legales).
+  if (hash === '#cgu') {
+    return <LegalPage kind="cgu" />
+  }
+  if (hash === '#confidentialite') {
+    return <LegalPage kind="confidentialite" />
+  }
+  if (hash === '#mentions-legales') {
+    return <LegalPage kind="mentions-legales" />
   }
 
   // Mon espace / Hub d'abonnement (#hub).

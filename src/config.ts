@@ -120,9 +120,9 @@ export const CARNETS: Carnet[] = [
  */
 export const LINKS = {
   CONTACT_EMAIL: 'maxi.charr@gmail.com',
-  PRIVACY_URL: '#',
-  TERMS_URL: '#',
-  LEGAL_URL: '#',
+  PRIVACY_URL: '#confidentialite',
+  TERMS_URL: '#cgu',
+  LEGAL_URL: '#mentions-legales',
 }
 
 /**
