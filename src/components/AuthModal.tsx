@@ -18,6 +18,7 @@ export default function AuthModal({
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [info, setInfo] = useState('')
+  const [acceptedTerms, setAcceptedTerms] = useState(false)
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault()
@@ -26,6 +27,13 @@ export default function AuthModal({
 
     if (!supabase) {
       setError("La connexion n'est pas encore configurée.")
+      return
+    }
+
+    if (mode === 'signup' && !acceptedTerms) {
+      setError(
+        "Veuillez accepter les conditions d'utilisation pour créer votre compte.",
+      )
       return
     }
 
@@ -133,6 +141,38 @@ export default function AuthModal({
             />
           </div>
 
+          {mode === 'signup' && (
+            <label className="flex items-start gap-2.5 text-sm font-semibold text-cacao/85">
+              <input
+                type="checkbox"
+                checked={acceptedTerms}
+                onChange={(event) => setAcceptedTerms(event.target.checked)}
+                className="mt-0.5 h-4 w-4 shrink-0 accent-terracotta"
+              />
+              <span>
+                J'accepte les{' '}
+                <a
+                  href="#cgu"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-black text-terracotta underline"
+                >
+                  conditions d'utilisation
+                </a>{' '}
+                et la{' '}
+                <a
+                  href="#confidentialite"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-black text-terracotta underline"
+                >
+                  politique de confidentialité
+                </a>
+                .
+              </span>
+            </label>
+          )}
+
           {error && (
             <p className="rounded-2xl bg-red-50 px-4 py-3 text-sm font-bold text-red-700">
               {error}
@@ -147,7 +187,11 @@ export default function AuthModal({
 
           <button
             type="submit"
-            disabled={loading || !IS_SUPABASE_CONFIGURED}
+            disabled={
+              loading ||
+              !IS_SUPABASE_CONFIGURED ||
+              (mode === 'signup' && !acceptedTerms)
+            }
             className="w-full rounded-full bg-terracotta px-6 py-3.5 font-bold text-white shadow-soft transition hover:bg-terracotta-deep disabled:cursor-not-allowed disabled:opacity-60"
           >
             {loading
@@ -166,6 +210,7 @@ export default function AuthModal({
               setMode(mode === 'signup' ? 'login' : 'signup')
               setError('')
               setInfo('')
+              setAcceptedTerms(false)
             }}
             className="font-black text-terracotta underline"
           >
