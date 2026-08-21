@@ -1,28 +1,72 @@
-import { useState } from 'react'
-import { Menu, X } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
+import { LogOut, Menu, ShieldCheck, X } from 'lucide-react'
+import type { Session } from '@supabase/supabase-js'
 
-import { BRAND, LINKS } from '../config'
+import { BRAND } from '../config'
 import Button from './Button'
 
+type NavbarProps = {
+  session: Session | null
+  isAdmin?: boolean
+  onOpenAuth: (mode: 'login' | 'signup') => void
+  onLogout: () => void
+}
+
 const NAV_LINKS = [
-  { label: 'Fonctionnalités', href: '#fonctionnalites' },
+  { label: 'Les carnets', href: '#carnets' },
+  { label: 'Pourquoi', href: '#fonctionnalites' },
   { label: 'Comment ça marche', href: '#comment-ca-marche' },
   { label: 'Tarifs', href: '#tarifs' },
   { label: 'Questions', href: '#faq' },
 ]
 
-export default function Navbar() {
+export default function Navbar({
+  session,
+  isAdmin = false,
+  onOpenAuth,
+  onLogout,
+}: NavbarProps) {
   const [open, setOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+  const [accountOpen, setAccountOpen] = useState(false)
+  const accountRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  useEffect(() => {
+    if (!accountOpen) return
+    const onClick = (event: MouseEvent) => {
+      if (accountRef.current && !accountRef.current.contains(event.target as Node)) {
+        setAccountOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', onClick)
+    return () => document.removeEventListener('mousedown', onClick)
+  }, [accountOpen])
+
+  const userEmail = session?.user.email ?? ''
+  const initial = userEmail ? userEmail.charAt(0).toUpperCase() : '?'
 
   return (
-    <header className="sticky top-0 z-40 border-b border-bark/60 bg-card/80 backdrop-blur-md">
+    <header
+      className={`sticky top-0 z-40 border-b backdrop-blur-md transition-colors duration-300 ${
+        scrolled
+          ? 'border-bark/70 bg-card/90 shadow-card'
+          : 'border-bark/40 bg-card/70'
+      }`}
+    >
       <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-3.5">
         {/* Marque */}
         <a href="#top" className="flex items-center gap-2.5">
           <img
             src={BRAND.logo}
             alt={BRAND.name}
-            className="h-10 w-10 object-contain"
+            className="h-12 w-12 object-contain drop-shadow-sm"
           />
           <span className="font-display text-lg font-black text-espresso">
             {BRAND.name}
@@ -44,17 +88,72 @@ export default function Navbar() {
 
         {/* CTA desktop */}
         <div className="hidden items-center gap-3 lg:flex">
-          <a
-            href={LINKS.LOGIN_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-sm font-bold text-cacao/80 transition hover:text-terracotta"
-          >
-            Connexion
-          </a>
-          <Button href={LINKS.SIGNUP_URL} size="md">
-            Commencer
-          </Button>
+          {session ? (
+            <>
+              <a
+                href="#hub"
+                className="inline-flex items-center gap-2 rounded-full bg-espresso px-5 py-2.5 text-sm font-black text-white shadow-soft transition hover:-translate-y-0.5 hover:bg-espresso/90"
+              >
+                Mes carnets
+              </a>
+
+              <div ref={accountRef} className="relative">
+                <button
+                  type="button"
+                  onClick={() => setAccountOpen((v) => !v)}
+                  className="flex h-10 w-10 items-center justify-center rounded-full bg-linen text-sm font-black text-espresso ring-1 ring-bark transition hover:bg-sand"
+                  aria-label="Mon compte"
+                  aria-expanded={accountOpen}
+                >
+                  {initial}
+                </button>
+
+                {accountOpen && (
+                  <div className="absolute right-0 top-full mt-2 w-60 rounded-2xl border border-bark bg-card p-2 shadow-lift">
+                    <p className="truncate px-3 pb-2 pt-1 text-xs font-bold text-hazel">
+                      {userEmail}
+                    </p>
+
+                    {isAdmin && (
+                      <a
+                        href="#admin"
+                        onClick={() => setAccountOpen(false)}
+                        className="flex items-center gap-2 rounded-xl px-3 py-2.5 text-sm font-bold text-terracotta-deep transition hover:bg-terracotta-soft"
+                      >
+                        <ShieldCheck className="h-4 w-4" />
+                        Console admin
+                      </a>
+                    )}
+
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setAccountOpen(false)
+                        onLogout()
+                      }}
+                      className="mt-0.5 flex w-full items-center gap-2 rounded-xl px-3 py-2.5 text-sm font-bold text-cacao transition hover:bg-rose-50 hover:text-rose-700"
+                    >
+                      <LogOut className="h-4 w-4" />
+                      Se déconnecter
+                    </button>
+                  </div>
+                )}
+              </div>
+            </>
+          ) : (
+            <>
+              <Button
+                variant="secondary"
+                size="md"
+                onClick={() => onOpenAuth('login')}
+              >
+                Se connecter
+              </Button>
+              <Button size="md" onClick={() => onOpenAuth('signup')}>
+                Créer un compte
+              </Button>
+            </>
+          )}
         </div>
 
         {/* Burger mobile */}
@@ -86,17 +185,65 @@ export default function Navbar() {
           </nav>
 
           <div className="mt-3 grid gap-2">
-            <Button href={LINKS.SIGNUP_URL} size="lg" fullWidth>
-              Commencer gratuitement
-            </Button>
-            <Button
-              href={LINKS.LOGIN_URL}
-              variant="secondary"
-              size="lg"
-              fullWidth
-            >
-              Connexion
-            </Button>
+            {session ? (
+              <>
+                <a
+                  href="#hub"
+                  onClick={() => setOpen(false)}
+                  className="flex items-center justify-center gap-2 rounded-xl border border-bark bg-card px-3 py-2.5 text-center font-black text-cacao"
+                >
+                  Mes carnets
+                </a>
+                {isAdmin && (
+                  <a
+                    href="#admin"
+                    onClick={() => setOpen(false)}
+                    className="flex items-center justify-center gap-2 rounded-xl border border-terracotta/30 bg-terracotta-soft px-3 py-2.5 text-center font-black text-terracotta-deep"
+                  >
+                    <ShieldCheck className="h-4 w-4" />
+                    Console admin
+                  </a>
+                )}
+                <span className="truncate px-3 text-sm font-bold text-cacao/80">
+                  {userEmail}
+                </span>
+                <Button
+                  variant="secondary"
+                  size="lg"
+                  fullWidth
+                  onClick={() => {
+                    setOpen(false)
+                    onLogout()
+                  }}
+                >
+                  Se déconnecter
+                </Button>
+              </>
+            ) : (
+              <>
+                <Button
+                  size="lg"
+                  fullWidth
+                  onClick={() => {
+                    setOpen(false)
+                    onOpenAuth('signup')
+                  }}
+                >
+                  Créer un compte
+                </Button>
+                <Button
+                  variant="secondary"
+                  size="lg"
+                  fullWidth
+                  onClick={() => {
+                    setOpen(false)
+                    onOpenAuth('login')
+                  }}
+                >
+                  Se connecter
+                </Button>
+              </>
+            )}
           </div>
         </div>
       )}

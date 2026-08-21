@@ -2,28 +2,28 @@ import SectionHeader from './SectionHeader'
 
 const PAIN_POINTS = [
   {
-    emoji: '😤',
-    title: 'Des recettes éparpillées',
+    emoji: '😵‍💫',
+    title: 'Tout est éparpillé',
     description:
-      "Entre les captures d'écran, les Post-it et les liens envoyés à soi-même, impossible de retrouver ce bon petit plat.",
+      "Des notes par-ci, une appli par-là, un tableur quelque part… et au final, plus rien sous la main au bon moment.",
   },
   {
-    emoji: '🛒',
-    title: 'Des courses mal organisées',
+    emoji: '🧾',
+    title: "L'argent qui file",
     description:
-      "On arrive au magasin et il manque toujours l'ingrédient clé de la recette du soir.",
+      "Les dépenses s'enchaînent et, à la fin du mois, on se demande encore où est passé le reste.",
   },
   {
-    emoji: '🤔',
-    title: 'La question du soir',
+    emoji: '🍳',
+    title: 'La charge mentale du quotidien',
     description:
-      "« Qu'est-ce qu'on mange ? » revient chaque jour, et l'inspiration n'est pas toujours au rendez-vous.",
+      'Les repas, les courses, les petites tâches à ne pas oublier : tout repose sur la même tête, la vôtre.',
   },
   {
-    emoji: '🗑️',
-    title: 'Du gaspillage alimentaire',
+    emoji: '🎯',
+    title: 'De bonnes intentions, sans suivi',
     description:
-      'Des légumes oubliés au fond du frigo finissent à la poubelle, faute de planification.',
+      'On se promet de bouger, de mieux s’organiser… puis le quotidien reprend le dessus et les objectifs s’oublient.',
   },
 ]
 
@@ -33,8 +33,8 @@ export default function ProblemSolution() {
       <SectionHeader
         centered
         eyebrow="Vous vous reconnaissez ?"
-        title="La cuisine du quotidien mérite mieux"
-        subtitle="Ces petits tracas du quotidien, Carnet de recettes les résout en douceur."
+        title="Le quotidien mérite mieux qu'un tableur"
+        subtitle="Ces petits tracas du quotidien, Les Carnets les apaisent, un carnet à la fois."
       />
 
       <div className="mt-9 grid gap-4 sm:grid-cols-2 sm:gap-5">
@@ -58,12 +58,12 @@ export default function ProblemSolution() {
 
       <div className="mt-6 overflow-hidden rounded-card bg-terracotta-soft p-6 ring-1 ring-terracotta/20">
         <p className="font-display text-xl font-bold text-terracotta-deep">
-          ✨ Un seul carnet pour tout réunir.
+          ✨ Un esprit, plusieurs carnets.
         </p>
         <p className="mt-2 max-w-3xl leading-7 text-cacao/80">
-          Vos recettes, vos courses, votre planning et vos idées au même
-          endroit. Simple, chaleureux et toujours prêt quand vous cuisinez —
-          comme un vrai carnet de famille, en mieux.
+          Le même soin, le même calme, appliqués à votre cuisine, votre argent
+          et votre forme. Chaque carnet sa couleur, tous la même promesse :
+          simple, chaleureux et toujours prêt quand vous en avez besoin.
         </p>
       </div>
     </section>

@@ -1,18 +1,19 @@
-# Carnet de recettes — Site vitrine
+# Les Carnets — Site vitrine de l'écosystème
 
-Site vitrine **autonome** (séparé de l'application) qui présente le produit,
-convainc le visiteur et le dirige vers l'inscription puis le paiement.
+Site vitrine **autonome** qui présente **tout l'écosystème « Carnet »**
+(Carnet de recettes, Carnet de budget, Carnet de sport… et bientôt un Hub),
+convainc le visiteur et le dirige vers le carnet dont il a besoin.
 
 C'est un projet **indépendant** : il a sa propre configuration, ses propres
-dépendances et son propre build. Il peut être déplacé dans son propre dépôt et
-déployé sur son propre nom de domaine (ex. `www.carnet-de-recettes.fr`), tandis
-que l'application vit ailleurs (ex. `app.carnet-de-recettes.fr`).
+dépendances et son propre build. Il peut être déployé sur son propre nom de
+domaine (ex. `www.les-carnets.fr`), tandis que chaque application vit ailleurs
+(ex. `carnet-de-budget.vercel.app`).
 
 ## Stack
 
 - React 19 + TypeScript
 - Vite
-- Tailwind CSS v4 (mêmes tokens « chalet premium » que l'application)
+- Tailwind CSS v4 (mêmes tokens « papier premium » que les applications)
 - lucide-react (icônes)
 
 Aucune dépendance à Supabase ou à un backend : c'est une page 100 % statique.
@@ -20,7 +21,7 @@ Aucune dépendance à Supabase ou à un backend : c'est une page 100 % statique.
 ## Démarrer en local
 
 ```bash
-cd vitrine
+cd vitrine-carnet
 npm install
 npm run dev
 ```
@@ -34,50 +35,53 @@ npm run build      # génère le dossier dist/
 npm run preview    # prévisualise le build
 ```
 
-Le dossier `dist/` est un site statique : déployable tel quel sur **Netlify**,
-**Vercel**, **GitHub Pages**, **Cloudflare Pages**, OVH, etc.
+Le dossier `dist/` est un site statique : déployable tel quel sur **Vercel**,
+**Netlify**, **GitHub Pages**, **Cloudflare Pages**, OVH, etc.
 
 ## ⚙️ Configuration — le seul fichier à modifier
 
-Tout est centralisé dans **`src/config.ts`** :
+Tout est centralisé dans **`src/config.ts`**, autour du tableau `CARNETS` :
+chaque carnet de l'écosystème y est décrit.
 
-| Clé             | Rôle                                                            |
-| --------------- | -------------------------------------------------------------- |
-| `LINKS.APP_URL`      | Adresse de ton application (le carnet)                     |
-| `LINKS.SIGNUP_URL`   | Page d'inscription / création de compte                   |
-| `LINKS.LOGIN_URL`    | Page de connexion                                         |
-| `LINKS.CHECKOUT_URL` | Page/site de paiement de l'abonnement Premium             |
-| `LINKS.CONTACT_EMAIL`| Adresse de contact (pied de page)                         |
-| `LINKS.PRIVACY_URL` / `TERMS_URL` / `LEGAL_URL` | Pages légales              |
-| `PRICING`            | Prix et périodes affichés                                 |
+| Clé (par carnet) | Rôle                                                       |
+| ---------------- | ---------------------------------------------------------- |
+| `name` / `tagline` / `description` | Le nom et la promesse du carnet        |
+| `emoji` / `accent` | Visuel et couleur d'accent (`terracotta`, `sage`, `azure`, `honey`) |
+| `status`         | `'live'` (en ligne) ou `'soon'` (bientôt)                  |
+| `url`            | Adresse de l'application (ou `null` si pas en ligne)       |
+| `signupUrl`      | Page d'inscription du carnet (souvent `<url>/auth`)        |
+| `highlights`     | 3 points forts affichés sur la carte                       |
 
-### Le bouton « Premium »
+Autres réglages : `BRAND` (nom de l'écosystème), `LINKS` (contact + pages
+légales) et `PRICING` (prix affichés). Les CTA principaux de la page renvoient
+vers la section **« Les carnets »** (`#carnets`), d'où le visiteur choisit et
+ouvre l'application voulue.
 
-- Tant que `CHECKOUT_URL` vaut `null` → le bouton affiche **« Bientôt disponible »**
-  (désactivé).
-- Dès que tu renseignes une URL → le bouton devient **« Passer au Premium »** et
-  redirige vers ton site/page de paiement.
+### Ajouter ou activer un carnet
 
-C'est ainsi que la vitrine reste « une porte d'entrée vers tes sites » :
-l'inscription pointe vers l'app, le paiement vers ta page dédiée.
+1. Ajoute (ou complète) une entrée dans `CARNETS`.
+2. Passe `status` à `'live'` et renseigne `url` / `signupUrl` une fois déployé.
+3. C'est tout : la carte, l'aperçu du hero et les liens du pied de page se
+   mettent à jour automatiquement.
 
 ## Structure
 
 ```
-vitrine/
+vitrine-carnet/
 ├── index.html              # SEO / Open Graph / polices
 ├── src/
-│   ├── config.ts           # 👈 URLs & tarifs (à éditer)
-│   ├── index.css           # tokens de design (chalet premium)
+│   ├── config.ts           # 👈 carnets, liens & tarifs (à éditer)
+│   ├── index.css           # tokens de design (papier premium + accents)
 │   ├── App.tsx             # assemblage des sections
 │   └── components/
 │       ├── Navbar.tsx
 │       ├── Hero.tsx
 │       ├── ProblemSolution.tsx
+│       ├── Carnets.tsx          # 👈 vitrine de l'écosystème (depuis config)
 │       ├── Features.tsx
 │       ├── Benefits.tsx
 │       ├── HowItWorks.tsx
-│       ├── Testimonials.tsx   # ⚠️ avis d'exemple à remplacer
+│       ├── Testimonials.tsx     # ⚠️ avis d'exemple à remplacer
 │       ├── Pricing.tsx
 │       ├── Faq.tsx
 │       ├── FinalCta.tsx
@@ -87,7 +91,8 @@ vitrine/
 
 ## À personnaliser avant la mise en ligne
 
-1. **`src/config.ts`** : mettre les vraies URLs et le bon email de contact.
+1. **`src/config.ts`** : vérifier les URLs des carnets, les statuts et l'email
+   de contact.
 2. **`Testimonials.tsx`** : remplacer les témoignages d'exemple par de vrais avis.
 3. Pages légales (Confidentialité, CGU, Mentions) : créer les pages ou pointer
    les liens vers les bonnes adresses.

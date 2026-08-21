@@ -3,21 +3,21 @@ import SectionHeader from './SectionHeader'
 const STEPS = [
   {
     number: '1',
-    title: 'Créez votre carnet',
+    title: 'Choisissez votre carnet',
     description:
-      'Inscrivez-vous en quelques secondes et ajoutez vos premières recettes de famille.',
+      'Recettes, budget ou sport : commencez par le pan de votre vie qui en a le plus besoin.',
   },
   {
     number: '2',
-    title: 'Planifiez & faites vos courses',
+    title: 'Créez votre compte',
     description:
-      'Organisez la semaine et laissez la liste de courses se construire toute seule.',
+      'Gratuit et en quelques secondes. Vous êtes prêt à noter votre première chose.',
   },
   {
     number: '3',
-    title: 'Cuisinez sereinement',
+    title: 'Reprenez le contrôle',
     description:
-      'Suivez les étapes, ajustez les portions et régalez toute la maisonnée.',
+      'Au quotidien et en douceur, retrouvez de la clarté — un carnet aujourd’hui, les autres quand vous voulez.',
   },
 ]
 

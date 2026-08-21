@@ -1,40 +1,26 @@
 import { Heart, Leaf, ShieldCheck } from 'lucide-react'
 
-import { BRAND, LINKS } from '../config'
+import { BRAND, CARNETS, LINKS } from '../config'
 
 const TRUST_SIGNALS = [
-  { icon: Heart, label: 'Fait maison, avec amour' },
+  { icon: Heart, label: 'Fait avec soin' },
   { icon: ShieldCheck, label: 'Sans publicité' },
-  { icon: Leaf, label: 'Gratuit pour démarrer' },
+  { icon: Leaf, label: '14 jours d’essai gratuit' },
 ]
 
-const NAV_COLUMNS = [
-  {
-    title: 'Produit',
-    links: [
-      { label: 'Fonctionnalités', href: '#fonctionnalites' },
-      { label: 'Comment ça marche', href: '#comment-ca-marche' },
-      { label: 'Tarifs', href: '#tarifs' },
-      { label: 'Questions', href: '#faq' },
-    ],
-  },
-  {
-    title: 'Application',
-    links: [
-      { label: "Ouvrir l'application", href: LINKS.APP_URL },
-      { label: 'Créer un compte', href: LINKS.SIGNUP_URL },
-      { label: 'Connexion', href: LINKS.LOGIN_URL },
-    ],
-  },
-  {
-    title: 'Informations',
-    links: [
-      { label: 'Confidentialité', href: LINKS.PRIVACY_URL },
-      { label: "Conditions d'utilisation", href: LINKS.TERMS_URL },
-      { label: 'Mentions légales', href: LINKS.LEGAL_URL },
-      { label: 'Contact', href: `mailto:${LINKS.CONTACT_EMAIL}` },
-    ],
-  },
+const DISCOVER_LINKS = [
+  { label: 'Les carnets', href: '#carnets' },
+  { label: 'Fonctionnalités', href: '#fonctionnalites' },
+  { label: 'Comment ça marche', href: '#comment-ca-marche' },
+  { label: 'Tarifs', href: '#tarifs' },
+  { label: 'Questions', href: '#faq' },
+]
+
+const INFO_LINKS = [
+  { label: 'Confidentialité', href: LINKS.PRIVACY_URL },
+  { label: "Conditions d'utilisation", href: LINKS.TERMS_URL },
+  { label: 'Mentions légales', href: LINKS.LEGAL_URL },
+  { label: 'Contact', href: `mailto:${LINKS.CONTACT_EMAIL}` },
 ]
 
 const YEAR = new Date().getFullYear()
@@ -48,7 +34,7 @@ export default function Footer() {
             <img
               src={BRAND.logo}
               alt={BRAND.name}
-              className="h-11 w-11 object-contain"
+              className="h-14 w-14 object-contain"
             />
             <div>
               <p className="font-display font-black text-espresso">
@@ -61,9 +47,9 @@ export default function Footer() {
           </div>
 
           <p className="mt-5 max-w-sm text-sm leading-6 text-cacao/80">
-            Le carnet de famille qui réunit vos recettes, vos courses et vos
-            idées de repas au même endroit. Simple, chaleureux, toujours prêt
-            quand vous cuisinez.
+            L'écosystème de carnets qui met de l'ordre dans votre quotidien —
+            recettes, argent, forme — avec le même soin, le même calme, à chaque
+            page.
           </p>
 
           <ul className="mt-6 space-y-2">
@@ -84,26 +70,78 @@ export default function Footer() {
         </div>
 
         <div className="grid grid-cols-2 gap-8 sm:grid-cols-3">
-          {NAV_COLUMNS.map((column) => (
-            <nav key={column.title}>
-              <p className="text-xs font-black uppercase tracking-[0.12em] text-terracotta">
-                {column.title}
-              </p>
+          {/* Les carnets */}
+          <nav>
+            <p className="text-xs font-black uppercase tracking-[0.12em] text-terracotta">
+              Les carnets
+            </p>
 
-              <ul className="mt-4 space-y-2.5">
-                {column.links.map((link) => (
-                  <li key={link.label}>
+            <ul className="mt-4 space-y-2.5">
+              {CARNETS.map((carnet) =>
+                carnet.status === 'live' && carnet.url ? (
+                  <li key={carnet.id}>
                     <a
-                      href={link.href}
+                      href={carnet.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="text-sm font-bold text-cacao/80 transition hover:text-terracotta"
                     >
-                      {link.label}
+                      {carnet.name}
                     </a>
                   </li>
-                ))}
-              </ul>
-            </nav>
-          ))}
+                ) : (
+                  <li key={carnet.id}>
+                    <a
+                      href="#carnets"
+                      className="text-sm font-bold text-cacao/50 transition hover:text-terracotta"
+                    >
+                      {carnet.name} (bientôt)
+                    </a>
+                  </li>
+                ),
+              )}
+            </ul>
+          </nav>
+
+          {/* Découvrir */}
+          <nav>
+            <p className="text-xs font-black uppercase tracking-[0.12em] text-terracotta">
+              Découvrir
+            </p>
+
+            <ul className="mt-4 space-y-2.5">
+              {DISCOVER_LINKS.map((link) => (
+                <li key={link.label}>
+                  <a
+                    href={link.href}
+                    className="text-sm font-bold text-cacao/80 transition hover:text-terracotta"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          {/* Informations */}
+          <nav>
+            <p className="text-xs font-black uppercase tracking-[0.12em] text-terracotta">
+              Informations
+            </p>
+
+            <ul className="mt-4 space-y-2.5">
+              {INFO_LINKS.map((link) => (
+                <li key={link.label}>
+                  <a
+                    href={link.href}
+                    className="text-sm font-bold text-cacao/80 transition hover:text-terracotta"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
         </div>
       </div>
 

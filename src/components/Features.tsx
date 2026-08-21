@@ -1,27 +1,25 @@
 import {
-  BookOpen,
-  CalendarDays,
-  Heart,
-  Lightbulb,
-  Refrigerator,
-  Search,
-  ShoppingCart,
-  Sparkles,
-  Users,
+  Feather,
+  HeartHandshake,
+  LayoutGrid,
+  Palette,
+  ShieldCheck,
+  Smartphone,
 } from 'lucide-react'
 
 import SectionHeader from './SectionHeader'
 
-type Tone = 'terracotta' | 'honey' | 'sage'
+type Tone = 'terracotta' | 'honey' | 'sage' | 'azure'
 
 const TONE_BG: Record<Tone, string> = {
   terracotta: 'bg-terracotta-soft',
   honey: 'bg-honey-soft',
   sage: 'bg-sage-soft',
+  azure: 'bg-azure-soft',
 }
 
 type Feature = {
-  icon: typeof BookOpen
+  icon: typeof Feather
   tone: Tone
   title: string
   description: string
@@ -29,67 +27,46 @@ type Feature = {
 
 const FEATURES: Feature[] = [
   {
-    icon: BookOpen,
+    icon: Feather,
     tone: 'terracotta',
-    title: 'Toutes vos recettes réunies',
+    title: 'Simple, jamais intimidant',
     description:
-      'Ajoutez vos plats préférés avec ingrédients, étapes et photos. Retrouvez-les en un instant, organisés par catégories.',
+      "Toute la puissance d'un tableur, sans la complexité. Chaque carnet va à l'essentiel et se prend en main en quelques minutes.",
   },
   {
-    icon: ShoppingCart,
+    icon: HeartHandshake,
     tone: 'sage',
-    title: 'Liste de courses intelligente',
+    title: 'Clair et rassurant',
     description:
-      "Les ingrédients d'une recette filent directement dans votre liste, regroupés par rayon pour des courses sans oubli.",
+      'Vous savez toujours où vous en êtes. Un ton bienveillant, jamais culpabilisant, qui vous accompagne plutôt que de vous juger.',
   },
   {
-    icon: CalendarDays,
+    icon: Palette,
     tone: 'honey',
-    title: 'Planning de la semaine',
+    title: 'Beau au quotidien',
     description:
-      'Glissez vos repas sur la semaine et sachez toujours quoi préparer ce soir, sans y penser à la dernière minute.',
+      "Un design premium aux airs de papier chaleureux. Des outils qu'on a vraiment plaisir à ouvrir, jour après jour.",
   },
   {
-    icon: Refrigerator,
-    tone: 'sage',
-    title: 'Mode frigo & anti-gaspi',
+    icon: LayoutGrid,
+    tone: 'azure',
+    title: 'Tout réuni',
     description:
-      "Indiquez ce qu'il reste dans votre frigo : le carnet vous propose les recettes possibles. Fini le gaspillage.",
+      "Fini les notes, tableurs et applis éparpillés. Vos recettes, votre argent, votre sport : chacun a enfin sa place.",
   },
   {
-    icon: Lightbulb,
-    tone: 'honey',
-    title: 'Idées repas',
-    description:
-      "Un bouton « Inspire-moi » et un fil d'idées pour les soirs où l'on ne sait vraiment pas quoi cuisiner.",
-  },
-  {
-    icon: Sparkles,
+    icon: Smartphone,
     tone: 'terracotta',
-    title: 'Adaptation des portions',
+    title: 'Pensé pour le mobile',
     description:
-      'Cuisinez pour 2 ou pour 8 : les quantités se recalculent automatiquement selon le nombre de convives.',
+      "Des applications web qui s'utilisent aussi bien sur téléphone que sur ordinateur, sans rien à installer.",
   },
   {
-    icon: Heart,
-    tone: 'terracotta',
-    title: 'Favoris & collections',
-    description:
-      'Mettez de côté les recettes que la famille réclame et retrouvez-les en un seul geste.',
-  },
-  {
-    icon: Search,
+    icon: ShieldCheck,
     tone: 'sage',
-    title: 'Recherche rapide',
+    title: 'Vos données privées',
     description:
-      'Une recherche claire pour filtrer par nom, catégorie ou ingrédient et tomber pile sur la bonne recette.',
-  },
-  {
-    icon: Users,
-    tone: 'honey',
-    title: 'Carnet partagé en famille',
-    description:
-      'Avec Premium, partagez un même carnet entre plusieurs membres de la famille et cuisinez à plusieurs.',
+      "Vos informations restent les vôtres : sécurisées, sans publicité et jamais revendues. C'est notre engagement.",
   },
 ]
 
@@ -99,9 +76,9 @@ export default function Features() {
       <div className="mx-auto max-w-6xl px-5 py-12 sm:py-16">
         <SectionHeader
           centered
-          eyebrow="Fonctionnalités"
-          title="Tout ce qu'il faut pour cuisiner sereinement"
-          subtitle="Pensé comme un vrai carnet de famille : chaleureux, simple et toujours prêt quand vous cuisinez."
+          eyebrow="Pourquoi Les Carnets"
+          title="Le même soin, dans chaque carnet"
+          subtitle="Recettes, budget ou sport : tous nos carnets partagent le même esprit. Pensés pour durer, pas pour impressionner."
         />
 
         <div className="mt-9 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">

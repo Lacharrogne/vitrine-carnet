@@ -5,44 +5,44 @@ import SectionHeader from './SectionHeader'
 
 const FAQ_ITEMS = [
   {
-    question: 'À quoi sert Carnet de recettes ?',
+    question: 'Qu’est-ce que Les Carnets ?',
     answer:
-      "Carnet de recettes centralise vos recettes de cuisine, génère vos listes de courses, vous aide à planifier vos repas de la semaine et à cuisiner avec ce que vous avez déjà dans le frigo.",
+      "Les Carnets, c'est une famille d'applications qui mettent de l'ordre dans votre quotidien : vos recettes, votre argent, votre sport. Tous partagent le même esprit clair, premium et rassurant.",
   },
   {
-    question: 'Est-ce adapté à une famille ?',
+    question: 'Quels carnets existent aujourd’hui ?',
     answer:
-      "Absolument. Le carnet est pensé pour la cuisine du quotidien en famille. L'offre Premium permet même de partager un même carnet entre plusieurs membres de la famille.",
+      'Les trois carnets sont en ligne : le Carnet de recettes, le Carnet de budget et le Carnet de sport. D’autres viendront agrandir la suite au fil du temps.',
   },
   {
-    question: 'Puis-je ajouter mes propres recettes ?',
+    question: 'Dois-je créer un compte par carnet ?',
     answer:
-      "Oui, c'est l'une des fonctions principales. Ajoutez autant de recettes que vous voulez : ingrédients, étapes, photos et notes personnelles.",
+      "Oui : chaque carnet est indépendant et possède son propre compte. Vous n'utilisez que le ou les carnets qui vous intéressent, sans rien de superflu.",
   },
   {
-    question: 'La liste de courses est-elle automatique ?',
+    question: 'Combien ça coûte ?',
     answer:
-      "Oui. Quand vous planifiez un repas, les ingrédients de la recette s'ajoutent à votre liste, regroupés par rayon pour faciliter vos courses.",
+      "Chaque carnet commence par un essai gratuit de 14 jours, avec toutes les fonctionnalités et sans carte bancaire. Pour continuer ensuite, un abonnement simple débloque tout — sans engagement, résiliable à tout moment.",
   },
   {
-    question: 'Puis-je annuler mon abonnement ?',
+    question: 'Puis-je annuler à tout moment ?',
     answer:
-      "Oui, à tout moment et sans engagement. L'abonnement Premium est résiliable sans frais ni délai de préavis.",
+      "Oui, à tout moment et sans engagement. L'abonnement est résiliable sans frais ni délai de préavis, et l'essai gratuit ne vous engage à rien.",
   },
   {
     question: 'Mes données sont-elles privées ?',
     answer:
-      "Vos recettes et vos données restent privées, accessibles uniquement à vous et aux personnes que vous invitez. Aucune donnée n'est revendue à des tiers.",
+      "Vos données restent privées, accessibles uniquement à vous et aux personnes que vous invitez. Aucune n'est jamais revendue à des tiers.",
   },
   {
-    question: 'Est-ce utilisable sur mobile ?',
+    question: 'Ça marche sur mobile ?',
     answer:
-      'Oui, le carnet fonctionne sur smartphone, tablette et ordinateur, directement depuis votre navigateur web.',
+      'Oui, tous nos carnets sont des applications web qui fonctionnent sur smartphone, tablette et ordinateur, directement depuis votre navigateur.',
   },
   {
-    question: 'De nouvelles fonctionnalités seront-elles ajoutées ?',
+    question: 'De nouveaux carnets vont-ils arriver ?',
     answer:
-      "Oui, régulièrement. Le carnet évolue selon les retours des utilisateurs, et l'offre Premium inclut d'emblée les futures fonctionnalités.",
+      "Oui, l'écosystème s'agrandit régulièrement : de nouveaux carnets sont à l'étude pour couvrir d'autres aspects du quotidien, toujours avec le même soin.",
   },
 ]
 
