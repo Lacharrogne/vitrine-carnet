@@ -76,6 +76,16 @@ Deno.serve(async (request) => {
   const userId = typeof custom.user_id === 'string' ? custom.user_id : null
 
   const data = (payload.data ?? {}) as Record<string, unknown>
+
+  // On ne traite QUE l'objet abonnement lui-même (type "subscriptions").
+  // Les événements de facture (subscription_payment_success / _refunded →
+  // type "subscription-invoices") et de commande portent un `status` "paid"
+  // et n'ont ni `variant_id` ni `renews_at` : les écrire écraserait la ligne
+  // avec un statut non reconnu et verrouillerait un abonné actif.
+  if (data.type !== 'subscriptions') {
+    return new Response('Ignored: not a subscription object', { status: 200 })
+  }
+
   const attributes = (data.attributes ?? {}) as Record<string, unknown>
   const urls = (attributes.urls ?? {}) as Record<string, unknown>
 
