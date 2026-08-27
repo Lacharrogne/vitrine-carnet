@@ -170,7 +170,7 @@ export default function Navbar({
 
       {/* Menu mobile */}
       {open && (
-        <div className="border-t border-bark/60 bg-card px-5 py-4 lg:hidden">
+        <div className="min-h-[calc(100dvh-77px)] max-h-[calc(100dvh-77px)] overflow-y-auto border-t border-bark/60 bg-card px-5 py-4 lg:hidden">
           <nav className="grid gap-1">
             {NAV_LINKS.map((link) => (
               <a
