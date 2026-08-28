@@ -14,6 +14,7 @@ import Faq from './components/Faq'
 import FinalCta from './components/FinalCta'
 import Footer from './components/Footer'
 import AuthModal from './components/AuthModal'
+import InstallPrompt from './components/InstallPrompt'
 import Reveal from './components/Reveal'
 import AdminPage from './components/admin/AdminPage'
 import HubPage from './components/hub/HubPage'
@@ -205,6 +206,8 @@ export default function App() {
       {authMode && (
         <AuthModal initialMode={authMode} onClose={() => setAuthMode(null)} />
       )}
+
+      <InstallPrompt />
     </div>
   )
 }
