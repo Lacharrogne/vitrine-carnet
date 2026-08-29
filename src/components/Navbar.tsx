@@ -54,7 +54,7 @@ export default function Navbar({
 
   return (
     <header
-      className={`sticky top-0 z-40 border-b backdrop-blur-md transition-colors duration-300 ${
+      className={`sticky top-0 z-40 border-b pt-[env(safe-area-inset-top)] backdrop-blur-md transition-colors duration-300 ${
         scrolled
           ? 'border-bark/70 bg-card/90 shadow-card'
           : 'border-bark/40 bg-card/70'
