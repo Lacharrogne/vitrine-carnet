@@ -171,6 +171,12 @@ export default function Navbar({
       {/* Menu mobile */}
       {open && (
         <div className="min-h-[calc(100dvh-77px)] max-h-[calc(100dvh-77px)] overflow-y-auto border-t border-bark/60 bg-card px-5 py-4 lg:hidden">
+          {/* Fondu épinglé : le contenu défilé se fond dans le fond au lieu
+              d'être coupé net sous la barre. */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none sticky top-0 z-10 -mx-5 -mt-4 h-6 bg-gradient-to-b from-card to-transparent"
+          />
           <nav className="grid gap-1">
             {NAV_LINKS.map((link) => (
               <a
