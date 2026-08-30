@@ -81,7 +81,7 @@ export default function Features() {
           subtitle="Recettes, budget ou sport : tous nos carnets partagent le même esprit. Pensés pour durer, pas pour impressionner."
         />
 
-        <div className="mt-9 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-9 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {FEATURES.map((feature) => {
             const Icon = feature.icon
 

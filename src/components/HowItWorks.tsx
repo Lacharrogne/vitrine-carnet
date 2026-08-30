@@ -32,7 +32,7 @@ export default function HowItWorks() {
           title="Comment ça marche"
         />
 
-        <div className="mt-9 grid gap-5 md:grid-cols-3">
+        <div className="mt-9 grid grid-cols-1 gap-5 md:grid-cols-3">
           {STEPS.map((step) => (
             <div
               key={step.number}

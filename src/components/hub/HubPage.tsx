@@ -214,7 +214,7 @@ export default function HubPage({ session }: HubPageProps) {
         ) : null}
 
         {/* Cartes carnet */}
-        <div className="mt-6 grid gap-5 md:grid-cols-3">
+        <div className="mt-6 grid grid-cols-1 gap-5 md:grid-cols-3">
           {CARNETS.map((carnet) => {
             const accessible = isCarnetAccessible(carnet.id)
             const paidOwned =

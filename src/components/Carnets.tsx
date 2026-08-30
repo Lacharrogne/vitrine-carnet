@@ -65,7 +65,7 @@ export default function Carnets() {
           subtitle="Chaque carnet est pensé pour un pan de votre vie. Le même soin, la même clarté, le même calme — choisissez celui dont vous avez besoin aujourd'hui."
         />
 
-        <div className="mt-9 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-9 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {CARNETS.map((carnet) => {
             const accent = ACCENTS[carnet.accent]
             const isLive = carnet.status === 'live'

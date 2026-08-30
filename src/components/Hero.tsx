@@ -23,7 +23,7 @@ export default function Hero() {
   return (
     <section id="top" className="relative overflow-hidden">
       <div className="mx-auto max-w-6xl px-5 pb-12 pt-12 sm:pb-16 sm:pt-16 lg:pt-20">
-        <div className="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12">
+        <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12">
           {/* ── Texte ── */}
           <div className="reveal flex flex-col">
             <span className="flex w-fit items-center gap-2 rounded-full bg-terracotta-soft px-4 py-2 text-sm font-bold text-terracotta-deep">
