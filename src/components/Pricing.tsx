@@ -136,7 +136,7 @@ export default function Pricing({ session, onOpenAuth }: PricingProps) {
         </div>
 
         {/* Cartes */}
-        <div className="mt-8 grid items-stretch gap-6 lg:grid-cols-2">
+        <div className="mt-8 grid grid-cols-1 items-stretch gap-6 lg:grid-cols-2">
           {/* Essai gratuit */}
           <div className="flex flex-col rounded-[2rem] bg-card p-6 shadow-card ring-1 ring-bark sm:p-8">
             <div className="flex items-center justify-between gap-3">

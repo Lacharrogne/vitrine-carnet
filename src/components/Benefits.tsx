@@ -43,7 +43,7 @@ export default function Benefits() {
               Un compte, un abonnement, tous vos carnets
             </h2>
 
-            <div className="mt-9 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="mt-9 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {BENEFITS.map((benefit) => {
                 const Icon = benefit.icon
 

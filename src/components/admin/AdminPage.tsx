@@ -269,7 +269,7 @@ export default function AdminPage({ email }: AdminPageProps) {
       <h2 className="mt-8 font-display text-lg font-black text-espresso">
         Activité par carnet
       </h2>
-      <div className="mt-3 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mt-3 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <StatCard
           label="Recettes"
           value={overview?.recipes ?? 0}

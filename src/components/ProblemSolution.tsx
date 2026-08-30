@@ -37,7 +37,7 @@ export default function ProblemSolution() {
         subtitle="Ces petits tracas du quotidien, Les Carnets les apaisent, un carnet à la fois."
       />
 
-      <div className="mt-9 grid gap-4 sm:grid-cols-2 sm:gap-5">
+      <div className="mt-9 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5">
         {PAIN_POINTS.map((point) => (
           <div
             key={point.title}

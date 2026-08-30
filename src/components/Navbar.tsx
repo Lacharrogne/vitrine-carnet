@@ -177,7 +177,7 @@ export default function Navbar({
             aria-hidden="true"
             className="pointer-events-none sticky top-0 z-10 -mx-5 -mt-4 h-6 bg-gradient-to-b from-card to-transparent"
           />
-          <nav className="grid gap-1">
+          <nav className="grid grid-cols-1 gap-1">
             {NAV_LINKS.map((link) => (
               <a
                 key={link.href}
@@ -190,7 +190,7 @@ export default function Navbar({
             ))}
           </nav>
 
-          <div className="mt-3 grid gap-2">
+          <div className="mt-3 grid grid-cols-1 gap-2">
             {session ? (
               <>
                 <a

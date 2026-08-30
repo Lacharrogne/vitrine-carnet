@@ -25,7 +25,7 @@ export default function FounderNote() {
         <div className="pointer-events-none absolute -right-20 -top-20 h-56 w-56 rounded-full bg-terracotta/10 blur-3xl" />
         <div className="pointer-events-none absolute -bottom-24 -left-16 h-56 w-56 rounded-full bg-sage/10 blur-3xl" />
 
-        <div className="relative grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-14">
+        <div className="relative grid grid-cols-1 gap-10 lg:grid-cols-2 lg:items-center lg:gap-14">
           {/* Intention */}
           <div>
             <span className="inline-flex items-center gap-2 rounded-full bg-white/70 px-3.5 py-1.5 text-xs font-black uppercase tracking-[0.14em] text-terracotta shadow-soft ring-1 ring-bark">
@@ -51,7 +51,7 @@ export default function FounderNote() {
           </div>
 
           {/* Engagements */}
-          <div className="grid gap-4">
+          <div className="grid grid-cols-1 gap-4">
             {PROMISES.map((promise) => {
               const Icon = promise.icon
               return (
