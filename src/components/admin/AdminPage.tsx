@@ -82,6 +82,10 @@ export default function AdminPage({ email }: AdminPageProps) {
     'all' | 'premium' | 'comp' | 'admin'
   >('all')
   const [busy, setBusy] = useState<string | null>(null)
+  const [userToDelete, setUserToDelete] = useState<{
+    id: string
+    email: string
+  } | null>(null)
 
   const load = useCallback(async () => {
     setLoading(true)
@@ -420,15 +424,9 @@ export default function AdminPage({ email }: AdminPageProps) {
                       <button
                         type="button"
                         disabled={rowBusy}
-                        onClick={() => {
-                          if (
-                            window.confirm(
-                              `Supprimer définitivement ${u.email} et toutes ses données ?`,
-                            )
-                          ) {
-                            void run(u.user_id, () => deleteUser(u.user_id))
-                          }
-                        }}
+                        onClick={() =>
+                          setUserToDelete({ id: u.user_id, email: u.email })
+                        }
                         className="rounded-full bg-red-50 px-3 py-1.5 text-xs font-bold text-red-700 transition hover:bg-red-100 disabled:opacity-50"
                       >
                         Supprimer
@@ -449,6 +447,54 @@ export default function AdminPage({ email }: AdminPageProps) {
           </tbody>
         </table>
       </div>
+
+      {userToDelete && (
+        <div
+          className="fixed inset-0 z-50 flex items-end justify-center p-4 sm:items-center"
+          role="dialog"
+          aria-modal="true"
+        >
+          <button
+            type="button"
+            aria-label="Fermer"
+            onClick={() => setUserToDelete(null)}
+            className="absolute inset-0 bg-espresso/40 backdrop-blur-sm"
+          />
+
+          <div className="relative w-full max-w-md rounded-3xl border border-bark bg-card p-6 shadow-lift">
+            <h2 className="font-display text-xl font-black text-espresso">
+              Supprimer le compte
+            </h2>
+
+            <p className="mt-1.5 text-sm leading-relaxed text-cacao/80">
+              Supprimer définitivement <strong>{userToDelete.email}</strong> et
+              toutes ses données ? Cette action est irréversible.
+            </p>
+
+            <div className="mt-6 flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
+              <button
+                type="button"
+                onClick={() => setUserToDelete(null)}
+                className="rounded-full border border-bark bg-card px-5 py-2.5 text-sm font-bold text-cacao transition hover:bg-linen"
+              >
+                Annuler
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  const target = userToDelete
+                  setUserToDelete(null)
+                  void run(target.id, () => deleteUser(target.id))
+                }}
+                className="rounded-full bg-red-600 px-5 py-2.5 text-sm font-black text-white shadow-lg shadow-red-600/25 transition hover:-translate-y-0.5 hover:bg-red-500"
+              >
+                Supprimer le compte
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </Shell>
   )
 }
