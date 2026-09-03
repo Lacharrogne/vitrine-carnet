@@ -1,4 +1,11 @@
 import { useEffect, useState } from 'react'
+
+import {
+  INSTALL_AVAILABILITY_EVENT,
+  clearDeferredPrompt,
+  getDeferredPrompt,
+  type BeforeInstallPromptEvent,
+} from '../lib/installPrompt'
 import { Download, Share, X } from 'lucide-react'
 
 import { BRAND } from '../config'
@@ -11,11 +18,6 @@ import { BRAND } from '../config'
  *   suivre manuelle (Partager → Sur l'écran d'accueil).
  * - Masquée si déjà installée (mode standalone) ou déjà refusée une fois.
  */
-
-type BeforeInstallPromptEvent = Event & {
-  prompt: () => Promise<void>
-  userChoice: Promise<{ outcome: 'accepted' | 'dismissed' }>
-}
 
 const DISMISS_KEY = 'installPromptDismissed'
 
@@ -43,12 +45,20 @@ export default function InstallPrompt() {
       /* localStorage indisponible : on continue sans mémoire */
     }
 
-    const onPrompt = (event: Event) => {
-      event.preventDefault()
-      setDeferred(event as BeforeInstallPromptEvent)
+    const existing = getDeferredPrompt()
+    if (existing) {
+      setDeferred(existing)
       setVisible(true)
     }
-    window.addEventListener('beforeinstallprompt', onPrompt)
+
+    const onAvailability = () => {
+      const current = getDeferredPrompt()
+      setDeferred(current)
+      if (current) {
+        setVisible(true)
+      }
+    }
+    window.addEventListener(INSTALL_AVAILABILITY_EVENT, onAvailability)
 
     if (isIos()) setVisible(true)
 
@@ -63,7 +73,7 @@ export default function InstallPrompt() {
     window.addEventListener('appinstalled', onInstalled)
 
     return () => {
-      window.removeEventListener('beforeinstallprompt', onPrompt)
+      window.removeEventListener(INSTALL_AVAILABILITY_EVENT, onAvailability)
       window.removeEventListener('appinstalled', onInstalled)
     }
   }, [])
@@ -85,6 +95,7 @@ export default function InstallPrompt() {
     if (!deferred) return
     await deferred.prompt()
     await deferred.userChoice
+    clearDeferredPrompt()
     setDeferred(null)
     setVisible(false)
   }
