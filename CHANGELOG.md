@@ -15,6 +15,21 @@ Ordre antéchronologique (le plus récent en haut).
 
 ## 2026-09-04
 
+### Les erreurs se consultent depuis la console d'administration
+
+- **Ce qui change** : nouveau panneau « Erreurs rencontrées » dans la console
+  d'admin — filtrage par carnet, rafraîchissement, pile d'appel dépliable et
+  bouton de purge au-delà de 30 jours. Les messages **identiques sont
+  regroupés**, avec le nombre d'occurrences et, surtout, le nombre de
+  **personnes** touchées.
+- **Pourquoi** : sans écran, les erreurs remontées auraient dormi dans une
+  table que personne n'ouvre — on n'aurait fait que déplacer le problème.
+- **À savoir** : ce qui compte n'est pas la cinquantième occurrence d'un même
+  plantage mais le fait qu'il touche plusieurs comptes, d'où la pastille
+  « N personnes ». La lecture reste réservée aux administrateurs par la RLS.
+  `ARCHITECTURE.md` est mis à jour : l'audit du 3 septembre est intégralement
+  traité.
+
 ### Les erreurs rencontrées ne disparaissent plus dans le vide
 
 - **Ce qui change** : les erreurs non rattrapées (plantage de rendu, promesse

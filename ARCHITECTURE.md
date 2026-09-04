@@ -130,35 +130,38 @@ des plaies refermées :
 
 *Dernière révision : 4 septembre 2026.*
 
-Un **audit technique** a été mené le 3 septembre 2026. Ses constats et leur
-avancement sont suivis dans le tableau de bord
-**[issue #10](https://github.com/Lacharrogne/vitrine-carnet/issues/10)**, qui
-renvoie vers un ticket par dépôt.
+L'**audit technique** du 3 septembre 2026 est **intégralement traité**. Le
+tableau de bord [issue #10](https://github.com/Lacharrogne/vitrine-carnet/issues/10)
+en conserve le détail et l'historique.
 
-### Corrigé depuis (ne pas rouvrir)
+### Acquis — ne pas rouvrir
 
-- **Entitlement** — `getSubscription()` distingue désormais « lecture réussie »
-  de « lecture en échec » et réessaie ; la décision passe par une fonction pure
-  `decideEntitlement()` qui **laisse entrer en cas d'échec** (fail-open) et se
-  rabat sur le dernier statut connu. Une panne réseau ne peut plus verrouiller
-  un abonné dehors.
-- **Planning de repas & historique de cuisine (recettes)** — synchronisés au
-  compte via la migration `0018`, créneau par créneau, avec reprise des données
-  locales existantes à la première connexion.
-- **Intégration continue** — chaque dépôt a un workflow (build, lint, tests) et
-  un job qui **refuse une PR touchant `src/` ou `supabase/` sans mise à jour du
-  `CHANGELOG.md`**.
-- **Bundle sport** — pages chargées à la demande : 693 Ko → 477 Ko au démarrage.
+- **Entitlement robuste** — `getSubscription()` distingue « lecture réussie »
+  de « lecture en échec » et réessaie ; `decideEntitlement()` (pure, testée)
+  **laisse entrer en cas d'échec** et se rabat sur le dernier statut connu.
+  Une panne réseau ne peut plus verrouiller un abonné dehors.
+- **Données synchronisées** — planning de repas, historique de cuisine
+  (migration `0018`) et mensurations (`0019`) suivent le compte, avec reprise
+  des données locales à la première connexion.
+- **Intégration continue** — les quatre dépôts ont un workflow (build, lint,
+  tests) et un job qui **refuse une PR touchant `src/` ou `supabase/` sans mise
+  à jour du `CHANGELOG.md`**.
+- **Lint bloquant, zéro erreur** — les rares exceptions sont annotées avec leur
+  justification dans le code.
+- **Tests** — 143 au total (recettes, budget, sport).
+- **Suivi d'erreurs** — les erreurs non rattrapées remontent dans
+  `client_errors` (migration `0020`) et se consultent dans la console
+  d'administration, messages identiques regroupés.
 
-### Encore ouvert
+### À surveiller
 
-- **Mensurations (sport)** — seule donnée encore prisonnière du navigateur :
-  sur la page « Corps », le poids se synchronise mais pas les mensurations.
-- **Tests** — `Carnet-de-recettes` en a (Vitest) ; budget et sport n'en ont pas
-  encore, alors qu'ils concentrent de la logique de calcul (argent, 1RM, MET).
-- **Lint** — une douzaine d'erreurs `react-hooks` préexistantes. Le lint tourne
-  en CI mais reste **non bloquant** (`continue-on-error`) tant qu'elles ne sont
-  pas traitées ; le rendre bloquant ensuite.
+- **Volume des erreurs** — la table n'a pas de purge automatique. Lancer
+  `purge_client_errors(30)` de temps en temps, ou depuis le bouton de la
+  console d'administration.
+- **Fichiers devenus très gros**, là où se cachent les régressions :
+  `BudgetContext.tsx` 1980 l. · `GoalsPage.tsx` 1927 l. ·
+  `TransactionsPage.tsx` 1621 l. · `PlanningPage.tsx` (sport) 1616 l. ·
+  `RecipeDetailsPage.tsx` 1598 l.
 
 ### Principes qui ne changent pas
 

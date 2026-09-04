@@ -86,3 +86,42 @@ export async function deleteUser(userId: string) {
   })
   if (error) throw error
 }
+
+/* -------------------------------------------------------------------------- */
+/*  Erreurs rencontrées par les utilisateurs (table `client_errors`)           */
+/* -------------------------------------------------------------------------- */
+
+export type ClientError = {
+  id: string
+  user_id: string | null
+  app: string
+  message: string
+  stack: string | null
+  path: string | null
+  user_agent: string | null
+  created_at: string
+}
+
+/**
+ * Dernières erreurs remontées, les plus récentes d'abord.
+ *
+ * La RLS réserve déjà la lecture aux administrateurs : un non-admin reçoit
+ * simplement une liste vide.
+ */
+export async function listClientErrors(limit = 200): Promise<ClientError[]> {
+  const { data, error } = await client()
+    .from('client_errors')
+    .select('id, user_id, app, message, stack, path, user_agent, created_at')
+    .order('created_at', { ascending: false })
+    .limit(limit)
+
+  if (error) throw error
+  return (data as ClientError[] | null) ?? []
+}
+
+/** Supprime les erreurs plus vieilles que `days` jours. Renvoie le nombre effacé. */
+export async function purgeClientErrors(days: number): Promise<number> {
+  const { data, error } = await client().rpc('purge_client_errors', { days })
+  if (error) throw error
+  return (data as number | null) ?? 0
+}

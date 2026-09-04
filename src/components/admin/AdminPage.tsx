@@ -16,6 +16,7 @@ import {
   type AdminOverview,
   type AdminUser,
 } from '../../lib/admin'
+import ClientErrorsPanel from './ClientErrorsPanel'
 
 type AdminPageProps = {
   /** E-mail de l'admin connecté (affiché dans l'en-tête). */
@@ -495,6 +496,7 @@ export default function AdminPage({ email }: AdminPageProps) {
           </div>
         </div>
       )}
+      <ClientErrorsPanel />
     </Shell>
   )
 }
