@@ -104,9 +104,28 @@ des plaies refermées :
   d'installation ne s'affiche jamais sur desktop. Gérer la safe-area
   (`viewport-fit=cover` + `env()`).
 
-## Points à surveiller
+## État connu & points à surveiller
 
-- **Tests / CI** : seul `Carnet-de-recettes` a des tests (Vitest, logique pure).
-  Budget et sport n'ont ni tests ni CI.
-- Toute évolution de prix se fait **uniquement** dans `vitrine-carnet` — ne pas
-  réintroduire de config de prix dans les carnets.
+Un **audit technique** de l'écosystème a été mené le 3 septembre 2026. Ses
+constats et leur ordre de priorité sont suivis dans le tableau de bord
+**[issue #10](https://github.com/Lacharrogne/vitrine-carnet/issues/10)** de ce
+dépôt, qui renvoie vers un ticket par dépôt concerné.
+
+Les deux points les plus sensibles, à connaître avant de toucher au code :
+
+- **Entitlement fragile** — `getSubscription()` renvoie `null` aussi bien pour
+  « pas d'abonnement » que pour une **erreur de lecture**. Une coupure réseau
+  peut donc bloquer un abonné payant hors de l'app (il n'y a ni retry, ni
+  fail-open). Ne pas aggraver ce chemin ; le corriger est la priorité n°1.
+- **Données premium non synchronisées** — le planning de repas et l'historique
+  « déjà cuisiné » (recettes), ainsi que les mensurations (sport), vivent
+  uniquement en `localStorage` et ne suivent pas l'utilisateur d'un appareil à
+  l'autre.
+
+Autres points ouverts : aucune **CI** dans les quatre dépôts (les tests Vitest de
+recettes ne tournent jamais automatiquement), absence de tests dans budget et
+sport, et bundle non découpé dans sport (692 Ko).
+
+**Règle qui ne change pas** : toute évolution de prix se fait **uniquement** dans
+`vitrine-carnet/src/config.ts` — ne jamais réintroduire de config de prix dans
+les carnets.
