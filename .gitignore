@@ -15,3 +15,8 @@ yarn-error.log*
 !.vscode/extensions.json
 .idea
 .DS_Store
+
+# Variables d'environnement (jamais committées)
+.env
+.env.*
+!.env.example

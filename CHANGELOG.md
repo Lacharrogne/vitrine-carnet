@@ -15,6 +15,17 @@ Ordre antéchronologique (le plus récent en haut).
 
 ## 2026-09-04
 
+### ARCHITECTURE.md : état connu remis à jour
+
+- **Ce qui change** : la section « État connu » distingue désormais ce qui a
+  été **corrigé** (entitlement, synchronisation du planning, CI, bundle sport)
+  de ce qui reste **ouvert** (mensurations sport, tests, lint, absence de suivi
+  d'erreurs).
+- **Pourquoi** : elle décrivait encore comme problèmes actuels quatre points
+  réglés dans la journée. Un document périmé est pire que pas de document : il
+  fait repartir une session future sur de fausses pistes.
+- **À savoir** : cette section se relit à chaque correction d'un point d'audit.
+
 ### Migration 0018 — planning de repas & historique de cuisine
 
 - **Ce qui change** : deux nouvelles tables privées (RLS propriétaire seul),
