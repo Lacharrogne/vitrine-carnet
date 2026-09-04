@@ -115,26 +115,44 @@ des plaies refermées :
 
 ## État connu & points à surveiller
 
-Un **audit technique** de l'écosystème a été mené le 3 septembre 2026. Ses
-constats et leur ordre de priorité sont suivis dans le tableau de bord
-**[issue #10](https://github.com/Lacharrogne/vitrine-carnet/issues/10)** de ce
-dépôt, qui renvoie vers un ticket par dépôt concerné.
+*Dernière révision : 4 septembre 2026.*
 
-Les deux points les plus sensibles, à connaître avant de toucher au code :
+Un **audit technique** a été mené le 3 septembre 2026. Ses constats et leur
+avancement sont suivis dans le tableau de bord
+**[issue #10](https://github.com/Lacharrogne/vitrine-carnet/issues/10)**, qui
+renvoie vers un ticket par dépôt.
 
-- **Entitlement fragile** — `getSubscription()` renvoie `null` aussi bien pour
-  « pas d'abonnement » que pour une **erreur de lecture**. Une coupure réseau
-  peut donc bloquer un abonné payant hors de l'app (il n'y a ni retry, ni
-  fail-open). Ne pas aggraver ce chemin ; le corriger est la priorité n°1.
-- **Données premium non synchronisées** — le planning de repas et l'historique
-  « déjà cuisiné » (recettes), ainsi que les mensurations (sport), vivent
-  uniquement en `localStorage` et ne suivent pas l'utilisateur d'un appareil à
-  l'autre.
+### Corrigé depuis (ne pas rouvrir)
 
-Autres points ouverts : aucune **CI** dans les quatre dépôts (les tests Vitest de
-recettes ne tournent jamais automatiquement), absence de tests dans budget et
-sport, et bundle non découpé dans sport (692 Ko).
+- **Entitlement** — `getSubscription()` distingue désormais « lecture réussie »
+  de « lecture en échec » et réessaie ; la décision passe par une fonction pure
+  `decideEntitlement()` qui **laisse entrer en cas d'échec** (fail-open) et se
+  rabat sur le dernier statut connu. Une panne réseau ne peut plus verrouiller
+  un abonné dehors.
+- **Planning de repas & historique de cuisine (recettes)** — synchronisés au
+  compte via la migration `0018`, créneau par créneau, avec reprise des données
+  locales existantes à la première connexion.
+- **Intégration continue** — chaque dépôt a un workflow (build, lint, tests) et
+  un job qui **refuse une PR touchant `src/` ou `supabase/` sans mise à jour du
+  `CHANGELOG.md`**.
+- **Bundle sport** — pages chargées à la demande : 693 Ko → 477 Ko au démarrage.
 
-**Règle qui ne change pas** : toute évolution de prix se fait **uniquement** dans
-`vitrine-carnet/src/config.ts` — ne jamais réintroduire de config de prix dans
-les carnets.
+### Encore ouvert
+
+- **Mensurations (sport)** — seule donnée encore prisonnière du navigateur :
+  sur la page « Corps », le poids se synchronise mais pas les mensurations.
+- **Tests** — `Carnet-de-recettes` en a (Vitest) ; budget et sport n'en ont pas
+  encore, alors qu'ils concentrent de la logique de calcul (argent, 1RM, MET).
+- **Lint** — une douzaine d'erreurs `react-hooks` préexistantes. Le lint tourne
+  en CI mais reste **non bloquant** (`continue-on-error`) tant qu'elles ne sont
+  pas traitées ; le rendre bloquant ensuite.
+- **Aucun suivi d'erreurs en production** — les `console.error` ne remontent
+  nulle part : un incident chez un utilisateur passe inaperçu.
+
+### Principes qui ne changent pas
+
+- Toute évolution de prix se fait **uniquement** dans
+  `vitrine-carnet/src/config.ts` — ne jamais réintroduire de config de prix
+  dans les carnets.
+- **On ne verrouille jamais sur un doute**, et **on n'écrase jamais des données
+  sur la foi d'une lecture qui a échoué.**
