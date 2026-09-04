@@ -49,6 +49,12 @@ Tables par carnet (extrait, recettes) :
 - **`cooking_history`** — compteur « déjà cuisiné » et date du dernier passage,
   clé `(user_id, recipe_id)`.
 
+Côté sport :
+
+- **`body_weight_entries`** — une pesée par jour au maximum.
+- **`body_measurements`** — une série de mensurations par jour, cinq mesures
+  facultatives en centimètres.
+
 Fonctions RPC (SECURITY DEFINER, réservées aux admins via `is_admin()`) :
 `grant_comp_access` / `revoke_comp_access` (premium gratuit, `source='comp'`),
 `list_comp_access`, `admin_set_role`, `admin_delete_user`.
