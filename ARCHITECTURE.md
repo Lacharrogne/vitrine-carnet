@@ -55,6 +55,13 @@ Côté sport :
 - **`body_measurements`** — une série de mensurations par jour, cinq mesures
   facultatives en centimètres.
 
+Suivi technique :
+
+- **`client_errors`** — erreurs non rattrapées remontées par les quatre apps.
+  Écriture ouverte (une erreur peut survenir avant la connexion), **lecture et
+  purge réservées aux administrateurs** : les messages peuvent contenir des
+  bribes de données personnelles.
+
 Fonctions RPC (SECURITY DEFINER, réservées aux admins via `is_admin()`) :
 `grant_comp_access` / `revoke_comp_access` (premium gratuit, `source='comp'`),
 `list_comp_access`, `admin_set_role`, `admin_delete_user`.
@@ -152,8 +159,6 @@ renvoie vers un ticket par dépôt.
 - **Lint** — une douzaine d'erreurs `react-hooks` préexistantes. Le lint tourne
   en CI mais reste **non bloquant** (`continue-on-error`) tant qu'elles ne sont
   pas traitées ; le rendre bloquant ensuite.
-- **Aucun suivi d'erreurs en production** — les `console.error` ne remontent
-  nulle part : un incident chez un utilisateur passe inaperçu.
 
 ### Principes qui ne changent pas
 

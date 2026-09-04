@@ -15,6 +15,22 @@ Ordre antéchronologique (le plus récent en haut).
 
 ## 2026-09-04
 
+### Migration 0020 — suivi des erreurs rencontrées par les utilisateurs
+
+- **Ce qui change** : nouvelle table `client_errors`, destinée à recevoir les
+  erreurs non rattrapées des quatre applications, plus une fonction de purge
+  réservée aux administrateurs. Rien côté application pour l'instant.
+- **Pourquoi** : une erreur survenue chez quelqu'un n'allait nulle part — elle
+  s'affichait dans une console que personne ne regarde. Un incident n'était
+  connu que si la personne prenait la peine d'écrire, ou jamais.
+- **À savoir** : l'écriture est **ouverte aux visiteurs non connectés** (une
+  erreur peut survenir avant la connexion), mais la **lecture est réservée aux
+  administrateurs** : un message d'erreur peut contenir des bribes de données
+  personnelles. Des contraintes de taille bornent les messages pour qu'une
+  boucle d'erreurs ne puisse pas gonfler la base. Vérifiée sur PostgreSQL 16 :
+  un utilisateur ordinaire ne lit rien (pas même ses propres erreurs), ne
+  supprime rien, et ne peut pas attribuer une erreur à quelqu'un d'autre.
+
 ### Migration 0019 — mensurations corporelles
 
 - **Ce qui change** : nouvelle table privée `body_measurements` (RLS
