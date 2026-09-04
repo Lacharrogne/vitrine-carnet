@@ -15,6 +15,23 @@ Ordre antéchronologique (le plus récent en haut).
 
 ## 2026-09-04
 
+### Migration 0019 — mensurations corporelles
+
+- **Ce qui change** : nouvelle table privée `body_measurements` (RLS
+  propriétaire seul), une ligne par date avec cinq mesures facultatives en
+  centimètres. Rien côté application pour l'instant : la migration prépare le
+  terrain.
+- **Pourquoi** : sur la page « Corps » du carnet de sport, le poids était déjà
+  rattaché au compte mais les mensurations vivaient uniquement dans le
+  navigateur. Dans une même interface, la moitié des données suivait
+  l'utilisateur et l'autre non — changer de téléphone effaçait l'historique de
+  mensurations, silencieusement.
+- **À savoir** : deux garde-fous que la table du poids n'a pas — une ligne
+  entièrement vide est refusée (pas d'entrées fantômes dans l'historique), et
+  une mesure nulle ou négative aussi (erreur de saisie, pas une donnée).
+  Migration vérifiée sur une base PostgreSQL 16 jetable : rejouable,
+  contraintes et cascade conformes.
+
 ### ARCHITECTURE.md : état connu remis à jour
 
 - **Ce qui change** : la section « État connu » distingue désormais ce qui a
