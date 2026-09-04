@@ -40,6 +40,15 @@ Tables centrales (`public`) :
   (`renews_at`, `ends_at`), URLs portail client. Écrite par le **webhook Lemon
   Squeezy** en `service_role` (contourne la RLS) ; chacun ne lit que sa ligne.
 
+Tables par carnet (extrait, recettes) :
+
+- **`meal_plan_entries`** — planning de repas de la semaine type : une ligne par
+  créneau rempli, clé `(user_id, day_key, meal_key)`. Vider un créneau supprime
+  sa ligne ; deux appareils peuvent modifier des repas différents sans
+  s'écraser.
+- **`cooking_history`** — compteur « déjà cuisiné » et date du dernier passage,
+  clé `(user_id, recipe_id)`.
+
 Fonctions RPC (SECURITY DEFINER, réservées aux admins via `is_admin()`) :
 `grant_comp_access` / `revoke_comp_access` (premium gratuit, `source='comp'`),
 `list_comp_access`, `admin_set_role`, `admin_delete_user`.

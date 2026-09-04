@@ -15,6 +15,23 @@ Ordre antéchronologique (le plus récent en haut).
 
 ## 2026-09-04
 
+### Migration 0018 — planning de repas & historique de cuisine
+
+- **Ce qui change** : deux nouvelles tables privées (RLS propriétaire seul),
+  `meal_plan_entries` (une ligne par créneau **rempli** de la semaine type) et
+  `cooking_history` (compteur « déjà cuisiné » + date). Rien côté application
+  pour l'instant : la migration prépare le terrain.
+- **Pourquoi** : ces données ne vivaient que dans le navigateur, alors que le
+  planning est une fonctionnalité **payante** — rempli sur le téléphone, il
+  n'apparaissait pas sur l'ordinateur, et vider le cache l'effaçait sans
+  recours.
+- **À savoir** : une ligne par créneau (et non un document unique) pour que
+  deux appareils modifiant des repas différents ne s'écrasent pas, et pour ne
+  jamais avoir à réécrire tout le planning. Vider un créneau = supprimer sa
+  ligne. Les deux tables partent en cascade avec le compte ou la recette
+  concernée. Migration vérifiée sur une base PostgreSQL 16 jetable :
+  rejouable, contraintes et cascades conformes.
+
 ### Intégration continue (CI)
 
 - **Ce qui change** : ajout d'un workflow GitHub Actions qui, sur chaque PR et
