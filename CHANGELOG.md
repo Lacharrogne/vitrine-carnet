@@ -15,6 +15,21 @@ Ordre antéchronologique (le plus récent en haut).
 
 ## 2026-09-04
 
+### Migration 0021 — avis et retours d'expérience
+
+- **Ce qui change** : nouvelle table `feedback` — nature du retour (anomalie,
+  idée, compliment, autre), note facultative de 1 à 5, message, page d'origine
+  et adresse de contact facultative, avec un statut de traitement
+  (`new` / `read` / `done`). Rien côté application pour l'instant.
+- **Pourquoi** : le suivi d'erreurs capte ce qui **plante**, jamais ce qui
+  **manque ou déçoit**. Aucune trace technique ne dira qu'une fonctionnalité
+  est introuvable ou mal comprise — seule la personne peut le dire.
+- **À savoir** : écriture ouverte (on peut vouloir écrire sans compte), chacun
+  **relit ses propres avis**, et la lecture complète comme le classement sont
+  réservés aux administrateurs. Vérifiée sur PostgreSQL 16 : un utilisateur ne
+  voit pas les avis d'un autre, ne peut pas signer au nom d'autrui ni modifier
+  un statut.
+
 ### Les erreurs se consultent depuis la console d'administration
 
 - **Ce qui change** : nouveau panneau « Erreurs rencontrées » dans la console

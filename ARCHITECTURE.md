@@ -62,6 +62,9 @@ Suivi technique :
   purge réservées aux administrateurs** : les messages peuvent contenir des
   bribes de données personnelles.
 
+- **`feedback`** — avis et retours d'expérience. Écriture ouverte, chacun relit
+  les siens, **lecture complète et classement réservés aux administrateurs**.
+
 Fonctions RPC (SECURITY DEFINER, réservées aux admins via `is_admin()`) :
 `grant_comp_access` / `revoke_comp_access` (premium gratuit, `source='comp'`),
 `list_comp_access`, `admin_set_role`, `admin_delete_user`.
